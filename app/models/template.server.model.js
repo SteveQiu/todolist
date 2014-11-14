@@ -23,7 +23,8 @@ var TemplateSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
-	}
+	},
+	taskList: [{type: String}]
 });
 
 mongoose.model('Template', TemplateSchema);

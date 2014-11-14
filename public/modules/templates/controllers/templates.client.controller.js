@@ -4,12 +4,14 @@
 angular.module('templates').controller('TemplatesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Templates',
 	function($scope, $stateParams, $location, Authentication, Templates ) {
 		$scope.authentication = Authentication;
+		$scope.taskList = [];
 
 		// Create new Template
 		$scope.create = function() {
 			// Create new Template object
 			var template = new Templates ({
-				name: this.name
+				name: this.name,
+				taskList: this.taskList
 			});
 
 			// Redirect after save
@@ -21,6 +23,11 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
+		};
+
+		$scope.addTask = function() {
+			$scope.taskList.push($scope.taskInput);
+			$scope.taskInput = '';
 		};
 
 		// Remove existing Template

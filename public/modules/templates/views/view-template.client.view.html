@@ -18,4 +18,9 @@
 			<span data-ng-bind="template.user.displayName"></span>
 		</em>
 	</small>
+	<ul>
+      <li ng-repeat="task in template.taskList track by $index">
+          {{task}}
+      </li>
+  </ul>
 </section>
