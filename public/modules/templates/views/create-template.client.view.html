@@ -2,7 +2,8 @@
     <div class="page-header">
         <h1>New Template</h1>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
         <form class="form-horizontal" data-ng-submit="create()" novalidate>
             <fieldset>
                 <div class="form-group">
@@ -10,16 +11,16 @@
                     <div class="controls">
                         <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
                     </div>
-                    <label class="control-label" for="name">Task</label>
-                    <ul>
+                    <label class="control-label" for="name">Tasks</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="taskInput" id="name" class="form-control" placeholder="Add new task"><button type="button" ng-click="addTask()" class="btn btn-primary">Add</button>
+                    </div>
+                    <ul ui-sortable="taskListSortable" data-ng-model="taskList" class="list-unstyled">
                         <li ng-repeat="task in taskList track by $index">
-                            {{task}}
+                            <edit-in-place class="taskName" value="task.name"></edit-in-place>
+                            <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteTask($index)">&times;</button>
                         </li>
                     </ul>
-                    <div class="controls">
-                        <input type="text" data-ng-model="taskInput" id="name" class="form-control" placeholder="Task description" required>
-                        <button type="button" ng-click="addTask()" class="btn btn-primary">Add</button>
-                    </div>
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-default">
@@ -27,6 +28,13 @@
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
 				</div>
+                </br>
+                Just to see if it's working...
+                <ul ui-sortable="taskListSortable" data-ng-model="taskList" class="list-unstyled">
+                    <li ng-repeat="task in taskList track by $index">
+                        <span class="taskName">{{task.name}}</span>
+                    </li>
+                </ul>
             </fieldset>
         </form>
     </div>
