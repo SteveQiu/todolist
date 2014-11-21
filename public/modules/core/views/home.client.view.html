@@ -1,48 +1,19 @@
 <section data-ng-controller="HomeController">
-	<div class="jumbotron text-center">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
-				<img alt="MEAN.JS" class="img-responsive text-center" src="modules/core/img/brand/logo.png" />
-			</div>
-		</div>
-		<br>
-		<div class="row">
-			<p class="lead">
-				Open-Source Full-Stack Solution For MEAN Applications
-			</p>
-		</div>
-		<div class="row">
-			<p>
-				<a class="btn btn-primary btn-lg" href="http://meanjs.org" target="_blank">Learn more</a>
-			</p>
-		</div>
+
+<!-- STEVE'S CODE -->    
+	<div class="container-fluid" >
+	  <div class="row">
+	    <div class="col-sm-3 col-md-2 Lsidebar" ng-include="'modules/core/views/leftNav.html'" scope="" onload=""></div>
+
+	    <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main" ng-include="'modules/templates/views/create-template.client.view.html'" scope="" onload=""></div>
+	    <div class="col-sm-0 col-sm-offset-12 col-md-2 col-md-offset-10 Rsidebar" ng-include="'newsFeed.html'" scope="" onload=""></div>
+	  </div>
 	</div>
-	<div>
-		<h2>Congrats! You've configured and run the sample application.</h2>
-		<p>MEAN.JS is a web application boilerplate, which means you should start changing everything :-)</p>
-		<p>This sample application tracks users and articles.</p>
-		<ul>
-			<li>
-				Click
-				<em>Signup</em>
-				to get started.
-			</li>
-			<li>
-				Configure your app to work with your social accounts, by editing the
-				<em>/config/env/*.js</em>
-				files.
-			</li>
-			<li>
-				Edit your users module.
-			</li>
-			<li>
-				Add new CRUD modules.
-			</li>
-			<li>
-				Have fun...
-			</li>
-		</ul>
-	</div>
+
+<!-- ORIGINAL CODE -->
+
+
+	
 	<div class="row">
 		<div class="col-md-3">
 			<h2>
@@ -89,6 +60,10 @@
 			</ul>
 		</p>
 	</div>
-	<br>Enjoy &amp; Keep Us Updated,
-	<br>The MEAN.JS Team.
+	<br>
+	<br>
+
+
 </section>
+
+

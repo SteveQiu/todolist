@@ -25,7 +25,7 @@ var TemplateSchema = new Schema({
 		ref: 'User'
 	},
 	taskList: [{
-		name: { type: String, default:""},
+		name: { type: String, default:''},
 		isDone: { type: Boolean, default: false}}]
 });
 
