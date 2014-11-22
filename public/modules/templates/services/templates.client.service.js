@@ -42,7 +42,8 @@ angular.module('templates')
       };
       
       // When we leave the input, we're done editing.
-      inputElement.prop( 'onblur', function() {
+      //inputElement.prop( 'onblur', function() {
+      inputElement.on( 'blur', function() {
         $scope.editing = false;
         element.removeClass( 'active' );
       });

@@ -1,10 +1,14 @@
 .taskName{
-	font-size: 20px;
+	font-size: 25px;
 	border-bottom: 1px solid #eee;
-	padding-bottom: 5px;
+	padding-bottom: 2px;
 }
 
-
+.titleName{
+	font-size: 50px;
+	padding-bottom: 5px;
+	margin-top: 50px;
+}
 
 .edit-in-place span {
   cursor: pointer;

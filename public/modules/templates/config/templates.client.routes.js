@@ -20,10 +20,6 @@ angular.module('templates').config(['$stateProvider',
 		state('editTemplate', {
 			url: '/templates/:templateId/edit',
 			templateUrl: 'modules/templates/views/edit-template.client.view.html'
-		}).
-		state('seeTemplate', {
-			url: '/template/',
-			templateUrl: 'modules/templates/views/template.html'
 		});
 	}
 ]);
