@@ -1,17 +1,19 @@
+{{page}}
+{{pageUrl}}
 <ul class="nav nav-sidebar">
-	<li class="active"><a href="#">My Team <span class="sr-only">(current)</span></a></li>
-	<li><a href="#">My Checklists</a></li>
-	<li><a href="#">My Templates</a></li>
+	<li ng-class="{active: page=== 0}"><a href="#" ng-click="setPage(0)">My Team</a></li>
+	<li ng-class="{active: page===1}"><a href="#" ng-click="setPage(1)">My Checklists</a></li>
+	<li ng-class="{active: page===2}"><a href="#" ng-click="setPage(2)">My Templates</a></li>
 </ul>
 <p>Favorites</p>
 <ul class="nav nav-sidebar">
-	<li><a href="#">My Team</a></li>
-	<li><a href="#">My Checklists</a></li>
-	<li><a href="#">My Templates</a></li>
+	<li ng-class="{active: page===3}"><a href="#" ng-click="setPage(3)">My Team</a></li>
+	<li ng-class="{active: page===4}"><a href="#" ng-click="setPage(4)">My Checklists</a></li>
+	<li ng-class="{active: page===5}"><a href="#" ng-click="setPage(5)">My Templates</a></li>
 </ul>
 <p>Recent</p>
-<ul class="nav nav-pills">
-	<li class="active nav-boxist"><a href="#">My Team</a></li>
-	<li class="nav-boxist"><a href="#">My Checklists</a></li>
-	<li class="nav-boxist"><a href="#">My Templates</a></li>
+<ul class="nav nav-sidebar">
+	<li ng-class="{active: page===6}"><a href="#" ng-click="setPage(6)">My Team</a></li>
+	<li ng-class="{active: page===7}"><a href="#" ng-click="setPage(7)">My Checklists</a></li>
+	<li ng-class="{active: page===8}"><a href="#" ng-click="setPage(8)">My Templates</a></li>
 </ul>

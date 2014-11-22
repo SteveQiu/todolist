@@ -1,18 +1,10 @@
 .taskName{
 	font-size: 20px;
-	border-bottom: 1px lightgray solid;
+	border-bottom: 1px solid #eee;
 	padding-bottom: 5px;
 }
 
-#taskAdd {
-	margin-left: 40px;
-}
 
-#taskField {
-	padding-left: 5px;
-	font-size: 20px;
-	margin: 20px;
-}
 
 .edit-in-place span {
   cursor: pointer;
