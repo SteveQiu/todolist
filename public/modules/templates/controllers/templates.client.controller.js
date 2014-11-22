@@ -81,6 +81,8 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 			$scope.template = Templates.get({ 
 				templateId: $stateParams.templateId
 			});
+			$scope.taskList=$scope.template.taskList;
 		};
+
 	}
 ]);

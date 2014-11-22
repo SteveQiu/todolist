@@ -1,4 +1,5 @@
 <section data-ng-controller="TemplatesController" data-ng-init="findOne()">
+	<div ng-hide='true'>
 	<div class="page-header">
 		<h1 data-ng-bind="template.name"></h1>
 	</div>
@@ -23,4 +24,27 @@
           {{task.name}}
       </li>
   </ul>
+  </div>
+  <form class="form-horizontal" data-ng-submit="update()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <edit-in-place class="taskName" data-ng-model="template.name" value="template.name"></edit-in-place>
+                    <ul ui-sortable="taskListSortable" data-ng-model="template.taskList" class="list-unstyled">
+                        <li ng-repeat="task in template.taskList track by $index">
+                            <edit-in-place class="taskName" value="task.name"></edit-in-place>
+                            <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteTask($index)">&times;</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-default">
+                    <a class="btn btn-primary" data-ng-click="remove();">
+						<i class="glyphicon glyphicon-trash"></i>
+					</a>
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
 </section>

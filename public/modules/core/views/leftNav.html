@@ -1,17 +1,17 @@
 <ul class="nav nav-sidebar">
-	<li ng-class="{active: page=== 0}"><a href="#" ng-click="setPage(0)">My Team</a></li>
-	<li ng-class="{active: page===1}"><a href="#" ng-click="setPage(1)">My Checklists</a></li>
-	<li ng-class="{active: page===2}"><a href="#" ng-click="setPage(2)">My Templates</a></li>
+	<li ng-class="{active: navTab=== 0}"><a href="#" ng-click="setTab(0);setPage('welcome.html')">My Team</a></li>
+	<li ng-class="{active: navTab===1}"><a href="#" ng-click="setTab(1);setPage('modules/checklists/views/list-checklists.client.view.html')">My Checklists</a></li>
+	<li ng-class="{active: navTab===2}"><a href="#" ng-click="setTab(2);setPage('modules/templates/views/list-templates.client.view.html')">My Templates</a></li>
 </ul>
 <p>Favorites</p>
 <ul class="nav nav-sidebar">
-	<li ng-class="{active: page===3}"><a href="#" ng-click="setPage(3)">My Team</a></li>
-	<li ng-class="{active: page===4}"><a href="#" ng-click="setPage(4)">My Checklists</a></li>
-	<li ng-class="{active: page===5}"><a href="#" ng-click="setPage(5)">My Templates</a></li>
+	<li ng-class="{active: navTab===3}"><a href="#" ng-click="setTab(3)">My Team</a></li>
+	<li ng-class="{active: navTab===4}"><a href="#" ng-click="setTab(4)">My Checklists</a></li>
+	<li ng-class="{active: navTab===5}"><a href="#" ng-click="setTab(5)">My Templates</a></li>
 </ul>
 <p>Recent</p>
 <ul class="nav nav-sidebar">
-	<li ng-class="{active: page===6}"><a href="#" ng-click="setPage(6)">My Team</a></li>
-	<li ng-class="{active: page===7}"><a href="#" ng-click="setPage(7)">My Checklists</a></li>
-	<li ng-class="{active: page===8}"><a href="#" ng-click="setPage(8)">My Templates</a></li>
+	<li ng-class="{active: navTab===6}"><a href="#" ng-click="setTab(6)">My Team</a></li>
+	<li ng-class="{active: navTab===7}"><a href="#" ng-click="setTab(7)">My Checklists</a></li>
+	<li ng-class="{active: navTab===8}"><a href="#" ng-click="setTab(8)">My Templates</a></li>
 </ul>
