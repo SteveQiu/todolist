@@ -26,7 +26,8 @@
 	  </ul>
   </div>
   <!-- Everything above is the old view. The following is the new view. -->
-  <form class="form-horizontal" data-ng-submit="update()" ng-show='show' novalidate>
+  	<div class="col-sm-12">
+  		<form class="form-horizontal" data-ng-submit="update()" ng-show='show' novalidate>
             <fieldset>
                 <div class="form-group">
                 	<div class="page-header">
@@ -39,8 +40,15 @@
                             <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteTask($index)">&times;</button>
                         </li>
                     </ul>
+                    <div class="controls">
+                        <input type="text" data-ng-model="taskInput" id="name" class="form-control" placeholder="Add new task">
+                        <button type="button" ng-click="addTask(template.taskList)" class="btn btn-primary" style="margin-top: 10px;">Add New Task</button>
+                    </div>
                 </div>
                 <div class="form-group">
+                	<a class="btn btn-primary" href="#!/templates">
+						<i class="glyphicon glyphicon-th-list"></i>
+					</a>
                     <input type="submit" value="Done" class="btn btn-default">
                     <a class="btn btn-primary" data-ng-click="remove();">
 						<i class="glyphicon glyphicon-trash"></i>
@@ -51,4 +59,5 @@
 				</div>
             </fieldset>
         </form>
+    </div>
 </section>

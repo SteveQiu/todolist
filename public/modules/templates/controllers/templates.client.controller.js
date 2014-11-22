@@ -25,12 +25,17 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 			});
 		};
 
-		$scope.addTask = function() {
+		$scope.addTask = function(template) {
 			if ($scope.taskInput === '') {
 				return;
 			}
 			var newTask = {name: $scope.taskInput, isDone: false};
-			$scope.taskList.push(newTask);
+			if(template){
+				template.push(newTask);
+			}
+			else{
+				$scope.taskList.push(newTask);
+			}
 			$scope.taskInput = '';
 		};
 
