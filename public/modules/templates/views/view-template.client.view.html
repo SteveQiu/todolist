@@ -40,7 +40,8 @@
                             <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteTask($index)">&times;</button>
                         </li>
                     </ul>
-                    <div class="controls">
+
+                    <div class="controls" ng-show='checkCreator()'>
                         <input type="text" data-ng-model="taskInput" id="name" class="form-control" placeholder="Add new task">
                         <button type="button" ng-click="addTask(template.taskList)" class="btn btn-primary" style="margin-top: 10px;">Add New Task</button>
                     </div>
@@ -49,10 +50,12 @@
                 	<a class="btn btn-primary" href="#!/templates">
 						<i class="glyphicon glyphicon-th-list"></i>
 					</a>
+					<span ng-show='checkCreator()'>
                     <input type="submit" value="Done" class="btn btn-default">
                     <a class="btn btn-primary" data-ng-click="remove();">
 						<i class="glyphicon glyphicon-trash"></i>
 					</a>
+					</span>
                 </div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
