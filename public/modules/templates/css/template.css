@@ -10,6 +10,12 @@
 	margin-top: 50px;
 }
 
+.function{
+	margin-top: 65px;
+	border-top: 1px solid #eee;
+	padding-top: 30px;
+}
+
 .edit-in-place span {
   cursor: pointer;
 }

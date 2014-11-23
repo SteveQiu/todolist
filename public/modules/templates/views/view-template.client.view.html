@@ -46,14 +46,17 @@
                         <button type="button" ng-click="addTask(template.taskList)" class="btn btn-primary" style="margin-top: 10px;"><i class="glyphicon glyphicon-plus"></i> Add New Task </button>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group function">
                 	<a class="btn btn-primary" href="#!/templates">
-						<i class="glyphicon glyphicon-th-list"></i>
+						<i class="glyphicon glyphicon-th-list"></i> Back To List
+					</a>
+					<a class="btn btn-primary" href="#!/templates">
+						<i class="glyphicon glyphicon-check"></i> Instanciate
 					</a>
 					<span ng-show='checkCreator()'>
                     <input type="submit" value="Update" class="btn btn-primary">
                     <a class="btn btn-primary" data-ng-click="remove();">
-						<i class="glyphicon glyphicon-trash"></i>
+						<i class="glyphicon glyphicon-trash"></i> Delete
 					</a>
 					</span>
                 </div>
