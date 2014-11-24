@@ -27,7 +27,7 @@
   </div>
   <!-- Everything above is the old view. The following is the new view. -->
   	<div class="col-sm-12">
-  		<form class="form-horizontal" data-ng-submit="update()" ng-show='show' novalidate>
+  		<form class="form-horizontal" ng-show='show' novalidate>
             <fieldset>
                 <div class="form-group">
                 	<div class="page-header">
@@ -42,7 +42,7 @@
                     </ul>
 
                     <div class="controls" ng-show='checkCreator()'>
-                        <input type="text" data-ng-model="taskInput" id="name" class="form-control" placeholder="Add new task">
+                        <input type="text" ng-enter="addTask(template.taskList)" data-ng-model="taskInput" id="name" class="form-control" placeholder="Add new task">
                         <button type="button" ng-click="addTask(template.taskList)" class="btn btn-primary" style="margin-top: 10px;"><i class="glyphicon glyphicon-plus"></i> Add New Task </button>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
 						<i class="glyphicon glyphicon-check"></i> Instantiate
 					</a>
 					<span ng-show='checkCreator()'>
-                    <input type="submit" value="Update" class="btn btn-primary">
+                    <button type="button" ng-click="update()" value="Update" class="btn btn-primary">Update</button>
                     <a class="btn btn-primary" data-ng-click="remove();">
 						<i class="glyphicon glyphicon-trash"></i> Delete
 					</a>

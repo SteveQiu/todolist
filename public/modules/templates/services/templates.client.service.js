@@ -49,4 +49,18 @@ angular.module('templates')
       });
     }
   };
+})
+
+.directive('ngEnter',function  () {
+ return function  (scope, elem, attrs) {
+  $(elem).keyup(function  (e) {
+   //Enter Button Keycode is 13
+   if (e.keyCode === 13) {
+    //Calls the function mapped to ng-enter in the markup
+    scope.$apply(function () {
+      scope.$eval(attrs.ngEnter);
+    });
+   }
+  });
+ };
 });
