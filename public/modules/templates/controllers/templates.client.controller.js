@@ -5,6 +5,7 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 	function($scope, $stateParams, $location, Authentication, Templates ) {
 		$scope.authentication = Authentication;
 		$scope.taskList = [];
+		$scope.taskInput = '';
 
 		// Create new Template
 		$scope.create = function() {
