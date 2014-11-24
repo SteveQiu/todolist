@@ -1,26 +1,69 @@
-<section data-ng-controller="TemplatesController" data-ng-init="findOne()">
-	<div class="page-header">
-		<h1 data-ng-bind="template.name"></h1>
-	</div>
-	<div class="pull-right" data-ng-show="authentication.user._id == template.user._id">
-		<a class="btn btn-primary" href="/#!/templates/{{template._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
-	</div>
-	<small>
-		<em class="text-muted">
-			Posted on
-			<span data-ng-bind="template.created | date:'mediumDate'"></span>
-			by
-			<span data-ng-bind="template.user.displayName"></span>
-		</em>
-	</small>
-	<ul>
-      <li ng-repeat="task in template.taskList track by $index">
-          {{task}}
-      </li>
-  </ul>
+<section data-ng-controller="TemplatesController" data-ng-init="findOne();show='true'">
+	<div ng-hide='show'>
+		<div class="page-header">
+			<h1 data-ng-bind="template.name"></h1>
+		</div>
+		<div class="pull-right" data-ng-show="authentication.user._id == template.user._id">
+			<a class="btn btn-primary" href="/#!/templates/{{template._id}}/edit">
+				<i class="glyphicon glyphicon-edit"></i>
+			</a>
+			<a class="btn btn-primary" data-ng-click="remove();">
+				<i class="glyphicon glyphicon-trash"></i>
+			</a>
+		</div>
+		<small>
+			<em class="text-muted">
+				Posted on
+				<span data-ng-bind="template.created | date:'mediumDate'"></span>
+				by
+				<span data-ng-bind="template.user.displayName"></span>
+			</em>
+		</small>
+		<ul>
+	      <li ng-repeat="task in template.taskList track by $index">
+	          {{task.name}}
+	      </li>
+	  </ul>
+  </div>
+  <!-- Everything above is the old view. The following is the new view. -->
+  	<div class="col-sm-12">
+  		<form class="form-horizontal" ng-show='show' novalidate>
+            <fieldset>
+                <div class="form-group">
+                	<div class="page-header">
+						<edit-in-place class="titleName" data-ng-model="template.name" value="template.name"></edit-in-place>
+					</div>
+
+                    <ul ui-sortable="taskListSortable" data-ng-model="template.taskList" class="list-unstyled">
+                        <li ng-repeat="task in template.taskList track by $index">
+                            <edit-in-place class="taskName" value="task.name"></edit-in-place>
+                            <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteTask($index)" ng-show='checkCreator()'>&times;</button>
+                        </li>
+                    </ul>
+
+                    <div class="controls" ng-show='checkCreator()'>
+                        <input type="text" ng-enter="addTask(template.taskList)" data-ng-model="taskInput" id="name" class="form-control" placeholder="Add new task">
+                        <button type="button" ng-click="addTask(template.taskList)" class="btn btn-primary" style="margin-top: 10px;"><i class="glyphicon glyphicon-plus"></i> Add New Task </button>
+                    </div>
+                </div>
+                <div class="form-group function">
+                	<a class="btn btn-primary" href="#!/templates">
+						<i class="glyphicon glyphicon-th-list"></i> Back To List
+					</a>
+					<a class="btn btn-primary" href="#!/templates">
+						<i class="glyphicon glyphicon-check"></i> Instantiate
+					</a>
+					<span ng-show='checkCreator()'>
+                    <button type="button" ng-click="update()" value="Update" class="btn btn-primary">Update</button>
+                    <a class="btn btn-primary" data-ng-click="remove();">
+						<i class="glyphicon glyphicon-trash"></i> Delete
+					</a>
+					</span>
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>
 </section>

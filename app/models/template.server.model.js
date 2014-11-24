@@ -24,7 +24,9 @@ var TemplateSchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User'
 	},
-	taskList: [{type: String}]
+	taskList: [{
+		name: { type: String, default:'', required: 'Please fill Task name', trim: true},
+		isDone: { type: Boolean, default: false}}]
 });
 
 mongoose.model('Template', TemplateSchema);

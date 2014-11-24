@@ -3,7 +3,7 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Charles Han -- Product Owner -- @OminStyle
 
 # THANKS
 

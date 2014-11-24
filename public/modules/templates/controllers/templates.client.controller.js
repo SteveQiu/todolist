@@ -5,6 +5,7 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 	function($scope, $stateParams, $location, Authentication, Templates ) {
 		$scope.authentication = Authentication;
 		$scope.taskList = [];
+		$scope.taskInput = '';
 
 		// Create new Template
 		$scope.create = function() {
@@ -25,9 +26,28 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 			});
 		};
 
-		$scope.addTask = function() {
-			$scope.taskList.push($scope.taskInput);
+		$scope.addTask = function(template) {
+			if ($scope.taskInput === '') {
+				return;
+			}
+			var newTask = {name: $scope.taskInput, isDone: false};
+			if(template){
+				template.push(newTask);
+			}
+			else{
+				$scope.taskList.push(newTask);
+			}
 			$scope.taskInput = '';
+		};
+
+		$scope.taskListSortable = {
+			containment: 'parent',
+			cursor: 'move',
+			tolerance: 'pointer'
+		};
+
+		$scope.deleteTask = function(index) {
+			this.taskList.splice(index,1);
 		};
 
 		// Remove existing Template
@@ -67,6 +87,12 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 			$scope.template = Templates.get({ 
 				templateId: $stateParams.templateId
 			});
+			$scope.taskList=$scope.template.taskList;
 		};
+
+		$scope.checkCreator = function(){
+			return ($scope.template.user._id===$scope.authentication.user._id);
+		};
+
 	}
 ]);
