@@ -53,7 +53,8 @@ angular.module('templates')
 
 .directive('ngEnter',function  () {
  return function  (scope, elem, attrs) {
-  $(elem).keyup(function  (e) {
+  /* replace $(elem) with elem */
+  (elem).keyup(function  (e) {
    //Enter Button Keycode is 13
    if (e.keyCode === 13) {
     //Calls the function mapped to ng-enter in the markup

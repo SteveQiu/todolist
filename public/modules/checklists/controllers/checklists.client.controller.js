@@ -4,6 +4,8 @@
 angular.module('checklists').controller('ChecklistsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Checklists',
 	function($scope, $stateParams, $location, Authentication, Checklists ) {
 		$scope.authentication = Authentication;
+		// $scope.taskList = [];
+		// $scope.taskInput = '';
 
 		// Create new Checklist
 		$scope.create = function() {
