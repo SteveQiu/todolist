@@ -1,11 +1,12 @@
 'use strict';
 
 // Checklists controller
-angular.module('checklists').controller('ChecklistsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Checklists',
-	function($scope, $stateParams, $location, Authentication, Checklists ) {
+angular.module('checklists').controller('ChecklistsController', ['$scope', '$stateParams', '$location', '$http', 'Authentication', 'Checklists',
+	function($scope, $stateParams, $location, $http, Authentication, Checklists ) {
 		$scope.authentication = Authentication;
 		$scope.taskList = [];
 		$scope.taskInput = '';
+		$scope.templateId = $stateParams.templateId;
 
 		// Create new Checklist
 		$scope.create = function() {
@@ -63,5 +64,32 @@ angular.module('checklists').controller('ChecklistsController', ['$scope', '$sta
 				checklistId: $stateParams.checklistId
 			});
 		};
+
+		$scope.findTemplate = function() {
+	        $http.get('/templates/'+ $scope.templateId)
+	            .success(function (data, status, headers, config) {
+	                // alert('Sending request to /templates/'+ $scope.templateId);
+	                $scope.template= data;
+	                //
+	                var checklist = new Checklists ({
+						name: $scope.template.name,
+						taskList: $scope.template.taskList
+					});
+
+					$scope.checklist = checklist;
+
+					// Redirect after save
+					checklist.$save(function(response) {
+						$location.path('checklists/' + response._id);
+						$scope.name = '';
+					}, function(errorResponse) {
+						$scope.error = errorResponse.data.message;
+					});
+	                //
+	            })
+	            .error(function (data, status, headers, config) {
+	                alert('Template does not exist!');
+	            });             
+        };
 	}
 ]);

@@ -14,7 +14,7 @@
     border-color:#78FA89;
 }
 
-.Lsidebar, .Rsidebar {
+.Lsidebar, .Rsidebar, .bigOnly {
   display: none;
 }
 @media (min-width: 768px) {
@@ -41,6 +41,9 @@
     overflow-x: hidden;
     overflow-y: auto; 
     border-left: 1px solid #eee;
+  }
+  .bigOnly{
+    display: inline;
   }
 
 .nav-sidebar > .active > a,

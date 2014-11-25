@@ -23,7 +23,11 @@ var ChecklistSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
-	}
+	},
+	taskList: [{
+		name: { type: String, default:'', required: 'Please fill Task name', trim: true},
+		isDone: { type: Boolean, default: false}
+	}]
 });
 
 mongoose.model('Checklist', ChecklistSchema);

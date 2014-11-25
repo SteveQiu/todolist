@@ -13,6 +13,10 @@ angular.module('checklists').config(['$stateProvider',
 			url: '/checklists/create',
 			templateUrl: 'modules/checklists/views/create-checklist.client.view.html'
 		}).
+		state('instantiateChecklist', {
+			url: '/checklists/create/:templateId',
+			templateUrl: 'modules/checklists/views/findTemplate.html'
+		}).
 		state('viewChecklist', {
 			url: '/checklists/:checklistId',
 			templateUrl: 'modules/checklists/views/view-checklist.client.view.html'

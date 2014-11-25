@@ -3,6 +3,7 @@
 module.exports = function(app) {
 	var users = require('../../app/controllers/users');
 	var checklists = require('../../app/controllers/checklists');
+	var templates = require('../../app/controllers/templates');
 
 	// Checklists Routes
 	app.route('/checklists')

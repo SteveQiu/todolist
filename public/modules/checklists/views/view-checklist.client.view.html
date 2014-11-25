@@ -17,5 +17,10 @@
 			by
 			<span data-ng-bind="checklist.user.displayName"></span>
 		</em>
+		<ul>
+	      <li ng-repeat="task in checklist.taskList track by $index">
+	        	{{task.name}}
+	      </li>
+	  	</ul>
 	</small>
 </section>
