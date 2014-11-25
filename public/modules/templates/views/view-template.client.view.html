@@ -35,7 +35,7 @@
 					</div>
 
                     <ul ui-sortable="taskListSortable" data-ng-model="template.taskList" class="list-unstyled">
-                        <li ng-repeat="task in template.taskList track by $index">
+                        <li class="taskItem" ng-repeat="task in template.taskList track by $index">
                             <edit-in-place class="taskName" value="task.name"></edit-in-place>
                             <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteTask($index,template.taskList);update()" ng-show='checkCreator()'>&times;</button>
                         </li>

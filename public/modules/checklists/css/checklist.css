@@ -8,6 +8,11 @@
   padding-top: 30px;
 }
 
+ul
+{
+    list-style-type: none;
+}
+
 /*
  * Copyright (c) 2013 Thibaut Courouble
  * http://www.cssflow.com
@@ -15,15 +20,6 @@
  * Licensed under the MIT License:
  * http://www.opensource.org/licenses/mit-license.php
  */
-.tasks {
-  margin: 50px auto;
-  width: 240px;
-  background: white;
-  border: 1px solid #cdd3d7;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
 
 .tasks-lists {
   position: absolute;
@@ -49,8 +45,8 @@
 
 .tasks-list-item {
   display: block;
-  line-height: 24px;
-  padding: 12px 15px;
+  line-height: 10px;
+  padding: 5px 15px;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -92,12 +88,7 @@
   -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
-.tasks-list-cb:checked ~ .tasks-list-mark {
-  border-color: #39ca74;
-}
-.tasks-list-cb:checked ~ .tasks-list-mark:before {
-  display: block;
-}
+
 
 .tasks-list-desc {
   font-weight: bold;

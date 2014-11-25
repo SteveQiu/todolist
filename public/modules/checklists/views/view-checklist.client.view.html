@@ -1,17 +1,16 @@
 <section data-ng-controller="ChecklistsController" data-ng-init="findOne()">
 	<div class="page-header">
 		<h1 data-ng-bind="checklist.name"></h1>
+			<em class="text-muted">
+				Posted on
+				<span data-ng-bind="checklist.created | date:'mediumDate'"></span>
+				by
+				<span data-ng-bind="checklist.user.displayName"></span>
+			</em>
 	</div>
 	<div class="pull-right" data-ng-show="authentication.user._id == checklist.user._id">
 	</div>
 	<small>
-		<em class="text-muted">
-			Posted on
-			<span data-ng-bind="checklist.created | date:'mediumDate'"></span>
-			by
-			<span data-ng-bind="checklist.user.displayName"></span>
-		</em>
-
 		<ul>
 	      	<li ng-repeat="task in checklist.taskList track by $index" >
 			    <label class="tasks-list-item">
