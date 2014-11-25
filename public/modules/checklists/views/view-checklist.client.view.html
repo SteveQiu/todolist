@@ -3,12 +3,6 @@
 		<h1 data-ng-bind="checklist.name"></h1>
 	</div>
 	<div class="pull-right" data-ng-show="authentication.user._id == checklist.user._id">
-		<a class="btn btn-primary" href="/#!/checklists/{{checklist._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
 	</div>
 	<small>
 		<em class="text-muted">
@@ -17,10 +11,25 @@
 			by
 			<span data-ng-bind="checklist.user.displayName"></span>
 		</em>
+
 		<ul>
-	      <li ng-repeat="task in checklist.taskList track by $index">
-	        	{{task.name}}
-	      </li>
+	      	<li ng-repeat="task in checklist.taskList track by $index" >
+			    <label class="tasks-list-item">
+	        		<input type="checkbox" class="tasks-list-cb" data-ng-model="task.isDone" ng-change="update()">
+	        		<!-- <span class="tasks-list-mark"></span> -->
+	        		<i class="glyphicon glyphicon-check bigFont" ng-show="task.isDone"></i>
+	        		<i class="glyphicon glyphicon-unchecked bigFont" ng-hide="task.isDone"></i>
+	        		<span class="tasks-list-desc"><font size='5'>{{task.name}}</font></span>
+	        	</label>
+	      	</li>
 	  	</ul>
 	</small>
+	<div class="form-group function">
+		<!-- 	<a class="btn btn-primary" href="/#!/checklists/{{checklist._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>	-->	
+ 		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i> Delete
+		</a>
+	</div>
 </section>
