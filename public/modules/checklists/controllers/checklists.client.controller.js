@@ -100,7 +100,7 @@ angular.module('checklists').controller('ChecklistsController', ['$scope', '$sta
         		}
         	}
         	// $scope.percent = numDone / $scope.checklist.taskList.length;
-        	return (100* numDone / $scope.checklist.taskList.length);
+        	return Math.round(100* numDone / $scope.checklist.taskList.length);
         };
 	}
 ]);
