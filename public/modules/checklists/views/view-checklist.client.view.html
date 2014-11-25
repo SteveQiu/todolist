@@ -1,7 +1,10 @@
 <section data-ng-controller="ChecklistsController" data-ng-init="findOne()">
-	<div class="page-header">
-		<span><h1 data-ng-bind="checklist.name"></h1></span>
-		<span>{{percentage()}} %</span>
+		<div class="page-header">
+			<span><font size="10" data-ng-bind="checklist.name"></font>
+			<font class="pull-right" size="10">
+				{{percentage()}} %
+			</font>
+		</span>
 		<div class="progress">
 			  <div class="progress-bar" role="progressbar" aria-valuenow="{{percentage()}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentage()}}%;">
 			    <!-- 60% -->
