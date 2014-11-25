@@ -37,13 +37,13 @@
                     <ul ui-sortable="taskListSortable" data-ng-model="template.taskList" class="list-unstyled">
                         <li ng-repeat="task in template.taskList track by $index">
                             <edit-in-place class="taskName" value="task.name"></edit-in-place>
-                            <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteTask($index)" ng-show='checkCreator()'>&times;</button>
+                            <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteTask($index,template.taskList);update()" ng-show='checkCreator()'>&times;</button>
                         </li>
                     </ul>
 
                     <div class="controls" ng-show='checkCreator()'>
-                        <input type="text" ng-enter="addTask(template.taskList)" data-ng-model="taskInput" id="name" class="form-control" placeholder="Add new task">
-                        <button type="button" ng-click="addTask(template.taskList)" class="btn btn-primary" style="margin-top: 10px;"><i class="glyphicon glyphicon-plus"></i> Add New Task </button>
+                        <input type="text" ng-enter="addTask(template.taskList);update()" data-ng-model="taskInput" id="name" class="form-control" placeholder="Add new task">
+                        <button type="button" ng-click="addTask(template.taskList);update()" class="btn btn-primary" style="margin-top: 10px;"><i class="glyphicon glyphicon-plus"></i> Add New Task </button>
                     </div>
                 </div>
                 <div class="form-group function">

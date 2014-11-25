@@ -46,8 +46,11 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 			tolerance: 'pointer'
 		};
 
-		$scope.deleteTask = function(index) {
-			this.taskList.splice(index,1);
+		$scope.deleteTask = function(index,taskList) {
+			if(taskList)
+				taskList.splice(index,1);
+			else
+				this.taskList.splice(index,1);
 		};
 
 		// Remove existing Template
