@@ -72,7 +72,7 @@ exports.delete = function(req, res) {
 /**
  * List of Templates
  */
-exports.list = function(req, res) { Template.find().sort('-created').populate('user', 'displayName').exec(function(err, templates) {
+exports.list = function(req, res) { Template.find({user: req.user}).sort('-created').populate('user', 'displayName').exec(function(err, templates) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
