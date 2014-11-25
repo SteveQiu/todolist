@@ -1,7 +1,12 @@
 <section data-ng-controller="ChecklistsController" data-ng-init="findOne()">
 	<div class="page-header">
 		<span><h1 data-ng-bind="checklist.name"></h1></span>
-		<h4>{{percentage()}} %</h4>
+		<span>{{percentage()}} %</span>
+		<div class="progress">
+			  <div class="progress-bar" role="progressbar" aria-valuenow="{{percentage()}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentage()}}%;">
+			    <!-- 60% -->
+			  </div>
+		</div>
 			<em class="text-muted">
 				Posted on
 				<span data-ng-bind="checklist.created | date:'mediumDate'"></span>
