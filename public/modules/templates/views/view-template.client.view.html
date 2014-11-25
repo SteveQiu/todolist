@@ -47,15 +47,18 @@
                     </div>
                 </div>
                 <div class="form-group function">
-                	<a class="btn btn-primary" href="#!/templates">
+                	<a class="btn btn-primary functionButton" href="#!/templates">
 						<i class="glyphicon glyphicon-th-list"></i> Back To List
 					</a>
-					<a class="btn btn-primary" href="#!/checklists/create/{{template._id}}">
+					<a class="btn btn-primary functionButton" href="#!/checklists/create/{{template._id}}">
 						<i class="glyphicon glyphicon-check"></i> Instantiate
 					</a>
 					<span ng-show='checkCreator()'>
-                    <button type="button" ng-click="update()" value="Update" class="btn btn-primary">Update</button>
-                    <a class="btn btn-primary" data-ng-click="remove();">
+                    <button type="button" ng-click="update()" value="Update" class="btn btn-primary functionButton"><i class="glyphicon glyphicon-cloud-upload"></i> Update</button>
+                    <a class="btn btn-primary functionButton" data-ng-click="create(template);">
+						<i class="glyphicon glyphicon-list-alt"></i> Make A Copy
+					</a>
+                    <a class="btn btn-primary functionButton" data-ng-click="remove();">
 						<i class="glyphicon glyphicon-trash"></i> Delete
 					</a>
 					</span>

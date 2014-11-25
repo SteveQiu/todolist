@@ -23,6 +23,11 @@
 	padding-top: 30px;
 }
 
+.functionButton{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
 .edit-in-place span {
   cursor: pointer;
 

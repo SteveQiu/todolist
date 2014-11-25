@@ -8,13 +8,22 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 		$scope.taskInput = '';
 
 		// Create new Template
-		$scope.create = function() {
+		$scope.create = function(templateCopy) {
 			// Create new Template object
-			var template = new Templates ({
-				name: this.name,
-				taskList: this.taskList
-			});
-
+			var template;
+			if (templateCopy) {
+				template = new Templates ({
+					name: templateCopy.name+' Copy',
+					taskList: templateCopy.taskList
+				});
+			}
+			else{
+				template = new Templates ({
+					name: this.name,
+					taskList: this.taskList
+				});
+			}
+			
 			// Redirect after save
 			template.$save(function(response) {
 				$location.path('templates/' + response._id);

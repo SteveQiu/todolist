@@ -30,7 +30,6 @@ ul
   width: 19px;
   height: 3px;
   font: 0/0 serif;
-  text-shadow: none;
   color: transparent;
 }
 .tasks-lists:before {
@@ -39,8 +38,6 @@ ul
   height: 3px;
   background: #8c959d;
   border-radius: 1px;
-  -webkit-box-shadow: 0 6px #8c959d, 0 -6px #8c959d;
-  box-shadow: 0 6px #8c959d, 0 -6px #8c959d;
 }
 
 .tasks-list-item {
