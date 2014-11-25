@@ -95,6 +95,6 @@ ul
   color: #000;
 }
 .tasks-list-cb:checked ~ .tasks-list-desc {
-  color: #34bf6e;
+  color: #aaa;
   text-decoration: line-through;
 }

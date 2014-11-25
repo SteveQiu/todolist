@@ -91,5 +91,16 @@ angular.module('checklists').controller('ChecklistsController', ['$scope', '$sta
 	                alert('Template does not exist!');
 	            });             
         };
+
+        $scope.percentage = function() {
+        	var numDone = 0;
+        	for (var i = $scope.checklist.taskList.length - 1; i >= 0; i--) {
+        		if ($scope.checklist.taskList[i].isDone===true) {
+        			numDone++;
+        		}
+        	}
+        	// $scope.percent = numDone / $scope.checklist.taskList.length;
+        	return (100* numDone / $scope.checklist.taskList.length);
+        };
 	}
 ]);

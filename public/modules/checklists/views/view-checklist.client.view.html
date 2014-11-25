@@ -1,6 +1,7 @@
 <section data-ng-controller="ChecklistsController" data-ng-init="findOne()">
 	<div class="page-header">
-		<h1 data-ng-bind="checklist.name"></h1>
+		<span><h1 data-ng-bind="checklist.name"></h1></span>
+		<h4>{{percentage()}} %</h4>
 			<em class="text-muted">
 				Posted on
 				<span data-ng-bind="checklist.created | date:'mediumDate'"></span>
@@ -8,8 +9,8 @@
 				<span data-ng-bind="checklist.user.displayName"></span>
 			</em>
 	</div>
-	<div class="pull-right" data-ng-show="authentication.user._id == checklist.user._id">
-	</div>
+	<p>Team members: </p>
+	<hr>
 	<small>
 		<ul>
 	      	<li ng-repeat="task in checklist.taskList track by $index" >
