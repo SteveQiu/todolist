@@ -17,6 +17,7 @@
 .Lsidebar, .Rsidebar, .bigOnly {
   display: none;
 }
+
 @media (min-width: 768px) {
   .Lsidebar {
     position: fixed;
@@ -57,5 +58,10 @@
   background-color: #eee;
 }
 
+/*
+.checklist-button{
+  width: 200px;
+}
+*/
 
 }

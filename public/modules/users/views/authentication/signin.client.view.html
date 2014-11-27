@@ -23,17 +23,17 @@
 			<fieldset>
 				<div class="form-group">
 					<label for="username">Username</label>
-					<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username">
+					<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username" style='width:auto'>
 				</div>
 				<div class="form-group">
 					<label for="password">Password</label>
-					<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">
+					<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password" style='width:auto'>
 				</div>
-				<div class="text-center form-group">
-					<button type="submit" class="btn btn-primary">Sign in</button>&nbsp; or&nbsp;
+				<div class="form-group in-one-line">
+					&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-primary">Sign in</button>&nbsp; or&nbsp;
 					<a href="/#!/signup">Sign up</a>
 				</div>
-				<div class="forgot-password">
+				<div class="forgot-password in-one-line">
 					<a href="/#!/password/forgot">Forgot your password?</a>
 				</div>
 				<div data-ng-show="error" class="text-center text-danger">
