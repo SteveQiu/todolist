@@ -58,10 +58,20 @@
   background-color: #eee;
 }
 
-/*
-.checklist-button{
-  width: 200px;
+
+a.checklist-button{
+  float: left;
+  width: 140px;
 }
-*/
+
+a.checklist-button:link, a.checklist-button:visited {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+a.checklist-button:hover {
+  color: #0abcde;
+  text-decoration: none;
+}
 
 }
