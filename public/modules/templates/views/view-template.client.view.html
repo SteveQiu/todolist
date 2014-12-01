@@ -50,8 +50,8 @@
                 	<a class="btn btn-primary functionButton" href="#!/templates">
 						<i class="glyphicon glyphicon-th-list"></i> Back To List
 					</a>
-					<a class="btn btn-primary functionButton" href="#!/checklists/create/{{template._id}}">
-						<i class="glyphicon glyphicon-check"></i> Run As Checklist
+					<a class="btn btn-primary functionButton" href="#!/checklists/create/{{template._id}}" ng-click="setTab(1)">
+						<i class="glyphicon glyphicon-check"></i> Use Checklist
 					</a>
 					<span ng-show='checkCreator()'>
                     <button type="button" ng-click="update()" value="Update" class="btn btn-primary functionButton"><i class="glyphicon glyphicon-cloud-upload"></i> Update</button>
