@@ -3,7 +3,7 @@
 module.exports = {
 	db: 'mongodb://localhost/checklist-dev',
 	app: {
-		title: 'checklist - Development Environment'
+		title: 'Checklists'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',

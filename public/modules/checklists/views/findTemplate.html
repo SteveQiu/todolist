@@ -1,8 +1,56 @@
 <section data-ng-controller="ChecklistsController" data-ng-init="findTemplate()">
-	<h1>Trying to load template</h1>
+	<div ng-show="false">
+		<h1>Trying to load template</h1>
+		<hr>
+	    <div>Template ID : {{templateId}}</div>
+	    <div>Object : {{template}}</div>
+	    <div>Checklist: {{checklist}}</div>
+	    <hr>
+	</div>
+	<!-- Make it look like empty checklist -->
+	<div class="page-header">
+		<span><font size="10" data-ng-bind="checklist.name"></font>
+		<font class="pull-right" size="10">
+			0 %
+		</font>
+	</span>
+	<div class="progress">
+		  <div class="progress-bar" role="progressbar" aria-valuenow="{{percentage()}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentage()}}%;">
+		    <!-- 60% -->
+		  </div>
+	</div>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="checklist.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="checklist.user.displayName"></span>
+		</em>
+	</div>
+	<p>Team members: </p>
 	<hr>
-    <div>Template ID : {{templateId}}</div>
-    <div>Object : {{template}}</div>
-    <div>Checklist: {{checklist}}</div>
-    <hr>
+	<small>
+		<ul>
+	      	<li ng-repeat="task in checklist.taskList track by $index" >
+			    <label class="tasks-list-item">
+	        		<input type="checkbox" class="tasks-list-cb" data-ng-model="task.isDone" ng-change="update()">
+	        		<!-- <span class="tasks-list-mark"></span> -->
+	        		<i class="glyphicon glyphicon-check bigFont" ng-show="task.isDone"></i>
+	        		<i class="glyphicon glyphicon-unchecked bigFont" ng-hide="task.isDone"></i>
+	        		<span class="tasks-list-desc"><font size='5'>{{task.name}}</font></span>
+	        	</label>
+	      	</li>
+	  	</ul>
+	</small>
+	<div class="form-group function">
+		<a class="btn btn-primary" href="#!/checklists">
+			<i class="glyphicon glyphicon-th-list"></i> Back To List
+		</a>
+
+		<!-- 	<a class="btn btn-primary" href="/#!/checklists/{{checklist._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>	-->	
+ 		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i> Delete
+		</a>
+	</div>
 </section>
