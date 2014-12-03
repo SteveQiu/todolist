@@ -29,9 +29,8 @@ angular.module('templates')
     // register listener to watch route changes
     $rootScope.$on('$locationChangeStart', function(event, next, current) {
       if ( Authentication.user === '' ) {
-        // no logged user, we should be going to #login
+        // no logged user, we should be going to /signin
         if ( $location.url().match('/templates') ) {
-          // not going to #/signin, we should redirect now
           $location.path( '/signin' );
         }
       }       
