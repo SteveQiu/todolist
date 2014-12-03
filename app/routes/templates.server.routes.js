@@ -6,7 +6,7 @@ module.exports = function(app) {
 
 	// Templates Routes
 	app.route('/templates')
-		.get(templates.list)
+		.get(templates.list, users.requiresLogin)
 		.post(users.requiresLogin, templates.create);
 
 	app.route('/templates/:templateId')
