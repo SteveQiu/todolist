@@ -37,7 +37,7 @@ exports.read = function(req, res) {
  * Update a Template
  */
 exports.update = function(req, res) {
-	var template = req.template ;
+	var template = req.template;
 
 	template = _.extend(template , req.body);
 
@@ -53,12 +53,13 @@ exports.update = function(req, res) {
 };
 
 /**
- * Delete an Template
+ * Archive a Template
  */
-exports.delete = function(req, res) {
-	var template = req.template ;
+exports.archive = function(req, res) {
+	var template = req.template;
+	template.active = false;
 
-	template.remove(function(err) {
+	template.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -72,7 +73,7 @@ exports.delete = function(req, res) {
 /**
  * List of Templates
  */
-exports.list = function(req, res) { Template.find({user: req.user}).sort('-created').populate('user', 'displayName').exec(function(err, templates) {
+exports.list = function(req, res) { Template.find({user: req.user, active: true}).sort('-created').populate('user', 'displayName').exec(function(err, templates) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

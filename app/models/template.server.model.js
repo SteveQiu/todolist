@@ -27,7 +27,11 @@ var TemplateSchema = new Schema({
 	taskList: [{
 		name: { type: String, default:'', required: 'Please fill Task name', trim: true},
 		isDone: { type: Boolean, default: false}
-	}]
+	}],
+	active: {
+		type: Boolean,
+		default: true
+	}
 });
 
 mongoose.model('Template', TemplateSchema);
