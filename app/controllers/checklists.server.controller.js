@@ -37,7 +37,7 @@ exports.read = function(req, res) {
  * Update a Checklist
  */
 exports.update = function(req, res) {
-	var checklist = req.checklist ;
+	var checklist = req.checklist;
 
 	checklist = _.extend(checklist , req.body);
 
@@ -53,12 +53,13 @@ exports.update = function(req, res) {
 };
 
 /**
- * Delete an Checklist
+ * Archive a Checklist
  */
-exports.delete = function(req, res) {
-	var checklist = req.checklist ;
+exports.archive = function(req, res) {
+	var checklist = req.checklist;
+	checklist.active = false;
 
-	checklist.remove(function(err) {
+	checklist.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -72,7 +73,7 @@ exports.delete = function(req, res) {
 /**
  * List of Checklists
  */
-exports.list = function(req, res) { Checklist.find({user: req.user}).sort('-created').populate('user', 'displayName').exec(function(err, checklists) {
+exports.list = function(req, res) { Checklist.find({user: req.user, active: true}).sort('-created').populate('user', 'displayName').exec(function(err, checklists) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
