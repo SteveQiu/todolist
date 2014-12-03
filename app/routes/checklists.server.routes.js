@@ -13,7 +13,7 @@ module.exports = function(app) {
 	app.route('/checklists/:checklistId')
 		.get(checklists.read)
 		.put(users.requiresLogin, checklists.hasAuthorization, checklists.update)
-		.delete(users.requiresLogin, checklists.hasAuthorization, checklists.delete);
+		.delete(users.requiresLogin, checklists.hasAuthorization, checklists.archive);
 
 	// Finish by binding the Checklist middleware
 	app.param('checklistId', checklists.checklistByID);
