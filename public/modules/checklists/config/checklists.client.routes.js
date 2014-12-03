@@ -26,4 +26,16 @@ angular.module('checklists').config(['$stateProvider',
 			templateUrl: 'modules/checklists/views/edit-checklist.client.view.html'
 		});
 	}
-]);
+])
+.run( function($rootScope, $location, Authentication) {
+    // register listener to watch route changes
+    $rootScope.$on('$locationChangeStart', function(event, next, current) {
+      if ( Authentication.user === '' ) {
+        // no logged user, we should be going to #login
+        if ( $location.url().match('/checklists') ) {
+          // not going to #/signin, we should redirect now
+          $location.path( '/signin' );
+        }
+      }       
+    });
+ });

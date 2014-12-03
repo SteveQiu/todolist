@@ -1,7 +1,8 @@
 'use strict';
 
 //Setting up route
-angular.module('templates').config(['$stateProvider',
+angular.module('templates')
+.config(['$stateProvider',
 	function($stateProvider) {
 		// Templates state routing
 		$stateProvider.
@@ -22,4 +23,17 @@ angular.module('templates').config(['$stateProvider',
 			templateUrl: 'modules/templates/views/edit-template.client.view.html'
 		});
 	}
-]);
+
+])
+.run( function($rootScope, $location, Authentication) {
+    // register listener to watch route changes
+    $rootScope.$on('$locationChangeStart', function(event, next, current) {
+      if ( Authentication.user === '' ) {
+        // no logged user, we should be going to #login
+        if ( $location.url().match('/templates') ) {
+          // not going to #/signin, we should redirect now
+          $location.path( '/signin' );
+        }
+      }       
+    });
+ });
