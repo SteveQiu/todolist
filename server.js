@@ -22,6 +22,10 @@ var db = mongoose.connect(config.db, function(err) {
 // Init the express application
 var app = require('./config/express')(db);
 
+// Init socket.io
+// var server = require('http').createServer(app);
+// var io = require('socket.io')(server);
+
 // Bootstrap passport config
 require('./config/passport')();
 
