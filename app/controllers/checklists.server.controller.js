@@ -47,6 +47,13 @@ exports.update = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
+
+			// notify every connected user about an update in a checklist
+			var socketio = req.app.get('socketio');
+			// console.log('Updating checklist from server');
+			// console.log(checklist);										// take out socket instance from the app container
+			socketio.emit('checklist.updated', checklist); 					// emit an event for all connected clients
+
 			res.jsonp(checklist);
 		}
 	});

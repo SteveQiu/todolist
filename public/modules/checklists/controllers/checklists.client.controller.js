@@ -1,8 +1,8 @@
 'use strict';
 
 // Checklists controller
-angular.module('checklists').controller('ChecklistsController', ['$scope', '$stateParams', '$location', '$http', 'Authentication', 'Checklists',
-	function($scope, $stateParams, $location, $http, Authentication, Checklists ) {
+angular.module('checklists').controller('ChecklistsController', ['$scope', '$stateParams', '$location', '$http', 'Socket', 'Authentication', 'Checklists',
+	function($scope, $stateParams, $location, $http, Socket, Authentication, Checklists ) {
 		$scope.authentication = Authentication;
 		$scope.taskList = [];
 		$scope.taskInput = '';
@@ -90,17 +90,30 @@ angular.module('checklists').controller('ChecklistsController', ['$scope', '$sta
 	            .error(function (data, status, headers, config) {
 	                alert('Template does not exist!');
 	            });             
-        };
+    };
 
-        $scope.percentage = function() {
-        	var numDone = 0;
-        	for (var i = $scope.checklist.taskList.length - 1; i >= 0; i--) {
-        		if ($scope.checklist.taskList[i].isDone===true) {
-        			numDone++;
-        		}
-        	}
-        	// $scope.percent = numDone / $scope.checklist.taskList.length;
-        	return Math.round(100* numDone / $scope.checklist.taskList.length);
-        };
+    $scope.percentage = function() {
+    	var numDone = 0;
+    	for (var i = $scope.checklist.taskList.length - 1; i >= 0; i--) {
+    		if ($scope.checklist.taskList[i].isDone===true) {
+    			numDone++;
+    		}
+    	}
+    	// $scope.percent = numDone / $scope.checklist.taskList.length;
+    	return Math.round(100* numDone / $scope.checklist.taskList.length);
+    };
+
+    // listening for the 'checklist.updated' event through the socket
+    Socket.on('checklist.updated', function(checklist) {
+    	console.log('Updating');
+    	console.log(checklist);		// logging the checklist passed through the event in the console
+    	// $scope.checklist = checklist;
+    	for (var i = $scope.checklist.taskList.length - 1; i >= 0; i--) {
+    		$scope.checklist.taskList[i].isDone=checklist.taskList[i].isDone;
+    	}
+    	console.log('Scope checklist');
+    	console.log($scope.checklist);
+		});
+
 	}
 ]);
