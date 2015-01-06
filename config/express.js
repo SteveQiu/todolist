@@ -18,7 +18,9 @@ var express = require('express'),
 	flash = require('connect-flash'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
-	path = require('path');
+	path = require('path'),
+	http = require('http'),
+  socketio = require('socket.io');
 
 module.exports = function(db) {
 	// Initialize express app
@@ -139,6 +141,12 @@ module.exports = function(db) {
 			error: 'Not Found'
 		});
 	});
+
+	// Attach Socket.io
+	var server = http.createServer(app);
+	var io = socketio.listen(server);
+	app.set('socketio', io);			// tie it up with the app instance so that we can access it from anywhere in our app.
+	app.set('server', server);		// storing the socket.io and the server instance in our app container.
 
 	return app;
 };

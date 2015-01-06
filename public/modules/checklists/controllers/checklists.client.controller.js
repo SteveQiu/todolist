@@ -1,8 +1,8 @@
 'use strict';
 
 // Checklists controller
-angular.module('checklists').controller('ChecklistsController', ['$scope', '$stateParams', '$location', '$http', 'Authentication', 'Checklists',
-	function($scope, $stateParams, $location, $http, Authentication, Checklists ) {
+angular.module('checklists').controller('ChecklistsController', ['$scope', '$stateParams', '$location', '$http', 'Socket', 'Authentication', 'Checklists',
+	function($scope, $stateParams, $location, $http, Socket, Authentication, Checklists ) {
 		$scope.authentication = Authentication;
 		$scope.taskList = [];
 		$scope.taskInput = '';
@@ -90,17 +90,40 @@ angular.module('checklists').controller('ChecklistsController', ['$scope', '$sta
 	            .error(function (data, status, headers, config) {
 	                alert('Template does not exist!');
 	            });             
-        };
+    };
 
-        $scope.percentage = function() {
-        	var numDone = 0;
-        	for (var i = $scope.checklist.taskList.length - 1; i >= 0; i--) {
-        		if ($scope.checklist.taskList[i].isDone===true) {
-        			numDone++;
-        		}
-        	}
-        	// $scope.percent = numDone / $scope.checklist.taskList.length;
-        	return Math.round(100* numDone / $scope.checklist.taskList.length);
-        };
+    $scope.percentage = function() {
+    	var numDone = 0;
+    	for (var i = $scope.checklist.taskList.length - 1; i >= 0; i--) {
+    		if ($scope.checklist.taskList[i].isDone===true) {
+    			numDone++;
+    		}
+    	}
+    	// $scope.percent = numDone / $scope.checklist.taskList.length;
+    	return Math.round(100* numDone / $scope.checklist.taskList.length);
+    };
+
+    // listening for the 'checklist.updated' event through the socket
+    Socket.on('checklist.updated', function(checklist) {
+    	console.log(checklist);		// logging the checklist passed through the event in the console
+
+    	// TO-DO: fire an event that updates the checklist based on another browser window
+
+		});
+
+    $scope.updateForTeam = function(){
+
+    	// TO-DO: add an event handler that actually updates the checklist based on another browser window
+
+    // 	$scope.$apply(function(checklist){
+				// $scope.checklist.$update(function(checklist) {
+				// 	var thisChecklistId = checklist._id;
+				// 	$location.path('checklists/' + thisChecklistId);
+				// }, function(errorResponse) {
+				// 	$scope.error = errorResponse.data.message;
+				// });
+    // 	});
+    };
+
 	}
 ]);
