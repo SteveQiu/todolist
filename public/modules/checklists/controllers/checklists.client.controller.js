@@ -105,9 +105,14 @@ angular.module('checklists').controller('ChecklistsController', ['$scope', '$sta
 
     // listening for the 'checklist.updated' event through the socket
     Socket.on('checklist.updated', function(checklist) {
+    	console.log('Updating');
     	console.log(checklist);		// logging the checklist passed through the event in the console
-    	$scope.checklist = checklist;
-
+    	// $scope.checklist = checklist;
+    	for (var i = $scope.checklist.taskList.length - 1; i >= 0; i--) {
+    		$scope.checklist.taskList[i].isDone=checklist.taskList[i].isDone;
+    	}
+    	console.log('Scope checklist');
+    	console.log($scope.checklist);
 		});
 
 	}
