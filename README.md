@@ -29,6 +29,13 @@ $ npm install -g bower
 $ sudo npm install -g grunt-cli
 ```
 
+* NEW - Need socket.io for real-time communication. This project requires both socket.io and angular-socket-io as specified by this tutorial: http://vexxhost.com/blog/mean-socket-io-integration-tutorial/
+
+```
+$ npm install socket.io --save
+$ bower install angular-socket-io --save
+```
+
 ## Downloading MEAN.JS
 There are several ways you can get the MEAN.JS boilerplate: 
 
