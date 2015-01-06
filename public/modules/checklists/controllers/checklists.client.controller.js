@@ -106,24 +106,9 @@ angular.module('checklists').controller('ChecklistsController', ['$scope', '$sta
     // listening for the 'checklist.updated' event through the socket
     Socket.on('checklist.updated', function(checklist) {
     	console.log(checklist);		// logging the checklist passed through the event in the console
-
-    	// TO-DO: fire an event that updates the checklist based on another browser window
+    	$scope.checklist = checklist;
 
 		});
-
-    $scope.updateForTeam = function(){
-
-    	// TO-DO: add an event handler that actually updates the checklist based on another browser window
-
-    // 	$scope.$apply(function(checklist){
-				// $scope.checklist.$update(function(checklist) {
-				// 	var thisChecklistId = checklist._id;
-				// 	$location.path('checklists/' + thisChecklistId);
-				// }, function(errorResponse) {
-				// 	$scope.error = errorResponse.data.message;
-				// });
-    // 	});
-    };
 
 	}
 ]);
