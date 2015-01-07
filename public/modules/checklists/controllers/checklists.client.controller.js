@@ -93,14 +93,17 @@ angular.module('checklists').controller('ChecklistsController', ['$scope', '$sta
     };
 
     $scope.percentage = function() {
-    	var numDone = 0;
-    	for (var i = $scope.checklist.taskList.length - 1; i >= 0; i--) {
-    		if ($scope.checklist.taskList[i].isDone===true) {
-    			numDone++;
+    	
+		var numDone = 0;
+		if($scope.checklist.taskList!== undefined){
+
+			for (var i = $scope.checklist.taskList.length - 1; i >= 0; i--) {
+	    		if($scope.checklist.taskList[i].isDone===true)
+	    			numDone++;
     		}
-    	}
-    	// $scope.percent = numDone / $scope.checklist.taskList.length;
-    	return Math.round(100* numDone / $scope.checklist.taskList.length);
+    		return Math.round(100* numDone / $scope.checklist.taskList.length);
+		}
+		return 0;
     };
 
     // listening for the 'checklist.updated' event through the socket
