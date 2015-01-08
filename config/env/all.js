@@ -20,6 +20,7 @@ module.exports = {
 				'public/lib/jquery/dist/jquery.min.js',
 				'public/lib/jquery-ui/jquery-ui.min.js',
 				'public/lib/angular/angular.js',
+				'public/lib/angular-route/angular-route.js',
 				'public/lib/angular-resource/angular-resource.js', 
 				'public/lib/angular-cookies/angular-cookies.js', 
 				'public/lib/angular-animate/angular-animate.js', 
