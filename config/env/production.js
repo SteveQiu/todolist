@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://nugg:password1@@dogen.mongohq.com:10061/app32217469',
+	db: 'mongodb://heroku_app33096701:b1iu5lan8dug5uf6o1f27m4jab@ds031711.mongolab.com:31711/heroku_app33096701',
 	assets: {
 		lib: {
 			css: [
