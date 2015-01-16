@@ -19,14 +19,14 @@ angular.module('core')
 
     	// Environment dependent checklistSocketURL
 			if (env === 'development') {
-				checklistSocketURL = 'http://localhost:3000';
+				checklistSocketURL = 'https://localhost:3000';
 			} else if (env === 'production') {
 				checklistSocketURL = 'https://teamfit-checklist.herokuapp.com:3000';
 			}
 
       return socketFactory({
           prefix: '',
-          ioSocket: io.connect(checklistSocketURL)
+          ioSocket: io.connect(checklistSocketURL, {secure: true})
 //						ioSocket: io.connect(checklistSocketURL)
       });
     }
