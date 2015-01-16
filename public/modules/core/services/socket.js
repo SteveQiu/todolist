@@ -1,13 +1,33 @@
 'use strict';
 
-/*global io:false */		// declares to JSHint that 'io' is a global variable and won't complain about it anymore.
+// declares to JSHint that the following are global variables and won't complain about them anymore.
+/*global io:false */		
+/*global nodeEnv:false*/
 
 //socket factory that provides the socket service
-angular.module('core').factory('Socket', ['socketFactory',
-    function(socketFactory) {
-        return socketFactory({
-            prefix: '',
-            ioSocket: io.connect('http://localhost:3000')
-        });
+angular.module('core')
+
+	.factory('env', function(){
+    return '{{=it.env}}';
+	})
+
+	.factory('Socket', ['socketFactory',
+
+    function(socketFactory, env) {
+
+    	var checklistSocketURL;
+
+    	// Environment dependent checklistSocketURL
+			if (env === 'development') {
+				checklistSocketURL = 'http://localhost:3000';
+			} else if (env === 'production') {
+				checklistSocketURL = 'https://teamfit-checklist.herokuapp.com:3000';
+			}
+
+      return socketFactory({
+          prefix: '',
+          ioSocket: io.connect(checklistSocketURL)
+//						ioSocket: io.connect(checklistSocketURL)
+      });
     }
-]);
+]); 
