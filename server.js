@@ -19,6 +19,9 @@ var db = mongoose.connect(config.db, function(err) {
 	}
 });
 
+// Variable port setting for heroku
+var port = process.env.PORT || 3000;
+
 // Init the express application
 var app = require('./config/express')(db);
 
@@ -26,7 +29,7 @@ var app = require('./config/express')(db);
 require('./config/passport')();
 
 // Start the app by listening on <port>
-app.get('server').listen(config.port);		// make sure we don’t mess up our http server instance of express.
+app.get('server').listen(port);		// make sure we don’t mess up our http server instance of express.
 
 // Expose app
 exports = module.exports = app;
