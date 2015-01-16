@@ -20,7 +20,11 @@ var express = require('express'),
 	consolidate = require('consolidate'),
 	path = require('path'),
 	http = require('http'),
-  socketio = require('socket.io');
+  socketio = require('socket.io')({
+  	'match origin protocol': true,
+  	'transports': 'xhr-polling', 
+	  'polling duration': 10	
+  });
 
 module.exports = function(db) {
 	// Initialize express app
@@ -144,7 +148,7 @@ module.exports = function(db) {
 
 	// Attach Socket.io
 	var server = http.createServer(app);
-	var io = socketio.listen(server);
+	var io = socketio.listen(server);	
 	app.set('socketio', io);			// tie it up with the app instance so that we can access it from anywhere in our app.
 	app.set('server', server);		// storing the socket.io and the server instance in our app container.
 
