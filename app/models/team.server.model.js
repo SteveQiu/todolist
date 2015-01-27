@@ -23,7 +23,11 @@ var TeamSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
-	}
+	},
+	teamMember: [{
+		type: Schema.ObjectId,
+		ref: 'User'
+	}]
 });
 
 mongoose.model('Team', TeamSchema);
