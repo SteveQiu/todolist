@@ -18,15 +18,16 @@ angular.module('core')
     	var checklistSocketURL;
 
     	// Environment dependent checklistSocketURL
-			if (env === 'development') {
-				checklistSocketURL = 'https://localhost:3000';
-			} else if (env === 'production') {
-				checklistSocketURL = '';
-			}
+			// if (env === 'development') {
+			// 	checklistSocketURL = 'http://localhost:3000';
+			// } else if (env === 'production') {
+			// 	checklistSocketURL = '';
+			// }
 
       return socketFactory({
           prefix: '',
-          ioSocket: io.connect(checklistSocketURL, {secure: true})
+          //ioSocket: io.connect(checklistSocketURL, {secure: true})
+      		ioSocket: io.connect()
       });
     }
 ]); 
