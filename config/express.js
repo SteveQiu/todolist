@@ -146,9 +146,11 @@ module.exports = function(db) {
 		});
 	});
 
-	// Attach Socket.io
+	// Attach and set up Socket.io
 	var server = http.createServer(app);
 	var io = socketio.listen(server);	
+  // io.set('transports', ['xhr-polling']);
+  // io.set('polling duration', 10);
 	app.set('socketio', io);			// tie it up with the app instance so that we can access it from anywhere in our app.
 	app.set('server', server);		// storing the socket.io and the server instance in our app container.
 
