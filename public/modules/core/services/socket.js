@@ -15,7 +15,7 @@ angular.module('core')
 
     function(socketFactory, env) {
 
-    	var checklistSocketURL;
+   //  	var checklistSocketURL;
 
     	// Environment dependent checklistSocketURL
 			// if (env === 'development') {
@@ -30,4 +30,4 @@ angular.module('core')
       		ioSocket: io.connect()
       });
     }
-]); 
+	]); 
