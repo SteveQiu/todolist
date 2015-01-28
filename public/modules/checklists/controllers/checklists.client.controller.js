@@ -1,7 +1,7 @@
 'use strict';
 
 // Checklists controller
-angular.module('checklists').controller('ChecklistsController', ['$scope', '$stateParams', '$location', '$http', 'Socket', 'Authentication', 'Checklists',
+angular.module('checklists').controller('ChecklistsController', ['$scope', '$stateParams', '$location', '$http', 'Socket', 'Authentication', 'Checklists', 'env',
 	function($scope, $stateParams, $location, $http, Socket, Authentication, Checklists ) {
 		$scope.authentication = Authentication;
 		$scope.taskList = [];
@@ -107,7 +107,9 @@ angular.module('checklists').controller('ChecklistsController', ['$scope', '$sta
     };
 
     // listening for the 'checklist.updated' event through the socket
-    Socket.on('checklist.updated', function(checklist) {
+    Socket.on('checklist.updated', function(checklist, env) {
+
+    	console.log(env);
    	
     	// Update the tasks of $scope.checklist from the new checklist
     	for (var i = $scope.checklist.taskList.length - 1; i >= 0; i--) {
