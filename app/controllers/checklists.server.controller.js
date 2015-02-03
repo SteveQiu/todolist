@@ -8,12 +8,21 @@ var mongoose = require('mongoose'),
 	Checklist = mongoose.model('Checklist'),
 	_ = require('lodash');
 
+function LogEntry(action, itemName, user){
+	this.action = action;
+	this.itemName = itemName;
+	this.user = user;
+}
+
 /**
  * Create a Checklist
  */
 exports.create = function(req, res) {
 	var checklist = new Checklist(req.body);
 	checklist.user = req.user;
+
+	var logEntry = new LogEntry ('instantiated checklist', req.body.name, req.user);
+	checklist.checklistLog.push(logEntry);
 
 	checklist.save(function(err) {
 		if (err) {
@@ -41,6 +50,9 @@ exports.update = function(req, res) {
 
 	checklist = _.extend(checklist , req.body);
 
+	var logEntryUpdate = new LogEntry(req.body.logAction, req.body.itemName, req.user);
+	checklist.checklistLog.push(logEntryUpdate);
+
 	checklist.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -63,6 +75,9 @@ exports.update = function(req, res) {
 exports.archive = function(req, res) {
 	var checklist = req.checklist;
 	checklist.active = false;
+
+	var logEntryArchive = new LogEntry('deleted checklist', checklist.name, req.user);
+	checklist.checklistLog.push(logEntryArchive);
 
 	checklist.save(function(err) {
 		if (err) {
