@@ -1,3 +1,30 @@
+<!-- Notification section -->
+<section data-ng-controller="NotificationsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Notifications</h1>
+    </div>
+    <div class="list-group">
+        <!-- <a data-ng-repeat="notification in notifications" data-ng-href="#!/notifications/{{notification._id}}" class="list-group-item"> -->
+        <a data-ng-repeat="notification in notifications" data-ng-href="#" class="list-group-item">
+            <!-- <small class="list-group-item-text">
+                Posted on
+                <span data-ng-bind="notification.created | date:'medium'"></span>
+                by
+                <span data-ng-bind="notification.user.displayName"></span>
+            </small>
+            <h4 class="list-group-item-heading" data-ng-bind="notification.name"></h4> -->
+            <button type="button" ng-click="" value="Accept" class="btn btn-primary functionButton">Accept</button>
+            <button type="button" ng-click="" value="Decline" class="btn btn-primary functionButton">Decline</button>
+            <span>You received an invitation from 
+                <span data-ng-bind="notification.user.displayName"></span>
+            </span>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!notifications.$resolved || notifications.length">
+        No Notifications yet, why don't you <a href="/#!/notifications/create">create one</a>?
+    </div>
+</section>
+<!-- Team section -->
 <section data-ng-controller="TeamsController" data-ng-init="find()">
     <div class="page-header">
         <h1>Teams</h1>
