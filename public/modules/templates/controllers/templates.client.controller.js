@@ -116,9 +116,3 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 
 	}
 ]);
-
-function LogEntry(description, property, user){
-	this.description = description;
-	this.property = property;
-	this.user = user;
-}
