@@ -1,9 +1,12 @@
-<p>My Newsfeed</p>
-<div>
-	
-</div>
-<ul class="list-group news-feed">
-	<li class="list-group-item">A team member checked off some stuffs</li>
-	<li class="list-group-item">A team member decided to start a task</li>
-	<li class="list-group-item">A team member decided to be productive! Wait... Nvm...</li>
-</ul>
+<section data-ng-controller="LogsController" data-ng-init="find()">
+	<p>My Newsfeed</p>
+	<div>
+		
+	</div>
+	<ul class="list-group news-feed">
+		<li data-ng-repeat="entry in logs" class="list-group-item"> 
+			<span data-ng-bind="entry.action"></span>
+			<span data-ng-bind="entry.itemName"></span>
+		</li>
+	</ul>
+</section>
