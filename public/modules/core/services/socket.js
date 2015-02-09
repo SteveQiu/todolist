@@ -23,11 +23,12 @@ angular.module('core')
 			// } else if (env === 'production') {
 			// 	checklistSocketURL = '';
 			// }
-
+      var host = location.origin;
       return socketFactory({
           prefix: '',
-          //ioSocket: io.connect(checklistSocketURL, {secure: true})
-      		ioSocket: io.connect('https://teamfit-checklist.herokuapp.com/', {secure: true})
+          // ioSocket: io.connect(checklistSocketURL, {secure: true})
+      		// ioSocket: io.connect('https://teamfit-checklist.herokuapp.com/', {secure: true})
+          ioSocket: io.connect(host, {port: 3000, transports: ['websocket']})
       });
     }
 	]); 
