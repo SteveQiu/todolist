@@ -1,4 +1,5 @@
-<section data-ng-controller="TeamsController" data-ng-init="findOne()">
+<section data-ng-controller="TeamsController" data-ng-init="findOne();show='true'">
+<div ng-hide='show'>
 	<div class="page-header">
 		<h1 data-ng-bind="team.name"></h1>
 	</div>
@@ -18,4 +19,48 @@
 			<span data-ng-bind="team.user.displayName"></span>
 		</em>
 	</small>
+	<ul>
+	      <li ng-repeat="member in team.members track by $index">
+	          {{member.name}}
+	      </li>
+	</ul>
+</div>
+<!-- Everything above is the old view. The following is the new view. -->
+	<div class="col-sm-12">
+  		<form class="form-horizontal" ng-show='show' novalidate>
+            <fieldset>
+                <div class="form-group">
+                	<div class="page-header">
+						<edit-in-place class="titleName" data-ng-model="team.name" value="team.name"></edit-in-place>
+					</div>
+
+                    <ul ui-sortable="memberListSortable" data-ng-model="team.members" class="list-unstyled">
+                        <li class="taskItem" ng-repeat="member in team.members track by $index">
+                            <edit-in-place class="taskName" value="member.name"></edit-in-place>
+                            <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteMember($index,team.members);update()" ng-show='checkAccess()'>&times;</button>
+                        </li>
+                    </ul>
+
+                    <div class="controls" ng-show='checkAccess()'>
+                        <input type="text" ng-enter="addMember(team.members);update()" data-ng-model="memberInput" id="name" class="form-control" placeholder="Add new task">
+                        <button type="button" ng-click="addMember(team.members);update()" class="btn btn-primary" style="margin-top: 10px;"><i class="glyphicon glyphicon-plus"></i> Add New Member </button>
+                    </div>
+                </div>
+                <div class="form-group function">
+                	<a class="btn btn-primary functionButton" href="#!/templates">
+						<i class="glyphicon glyphicon-th-list"></i> Back To List
+					</a>
+					<span ng-show='checkAccess()'>
+	                    <button type="button" ng-click="update()" value="Update" class="btn btn-primary functionButton"><i class="glyphicon glyphicon-cloud-upload"></i> Update</button>
+	                    <a class="btn btn-primary functionButton" data-ng-click="remove();">
+							<i class="glyphicon glyphicon-trash"></i> Delete
+						</a>
+					</span>
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>
 </section>

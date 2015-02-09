@@ -5,7 +5,7 @@
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="create()" novalidate>
             <fieldset>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="control-label" for="name">Name</label>
                     <div class="controls">
                         <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
@@ -16,7 +16,30 @@
                 </div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
-				</div>
+				</div> -->
+                <div class="form-group">
+                    <h2>Team Name:</h2>
+                    <div class="controls">
+                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
+                    </div>
+                    <h3>Members:</h3>
+                    <ul ui-sortable="memberListSortable" data-ng-model="memberList" class="list-unstyled">
+                        <li ng-repeat="member in memberList track by $index">
+                            <edit-in-place class="taskName" value="member.name"></edit-in-place>
+                            <!-- <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteTask($index)">&times;</button> -->
+                        </li>
+                    </ul>
+                    <div class="controls">
+                        <input type="text" ng-enter="addMember()" data-ng-model="memberInput" id="name" class="form-control" placeholder="Add new member">
+                        <button type="button" ng-click="addMember()" class="btn btn-primary" style="margin-top: 10px;">Add New Member</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="button" ng-click="create()" class="btn btn-default">Submit</button>
+                </div>
+                <div data-ng-show="error" class="text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
             </fieldset>
         </form>
     </div>
