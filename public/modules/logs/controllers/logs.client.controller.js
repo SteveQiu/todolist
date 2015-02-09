@@ -62,5 +62,32 @@ angular.module('logs').controller('LogsController', ['$scope', '$stateParams', '
 				logId: $stateParams.logId
 			});
 		};
+
+		$scope.buildUrl = function(entry){
+			var url = '#!/' + entry.type + 's';
+
+			if (entry.action.indexOf('deleted') > -1){
+				return url;
+			}
+
+			return url + '/' + entry.document;
+		};
+
+		var basicMessageString = function (action, itemName){
+			return action + ': \"' + itemName + '\"';
+		};
+
+		$scope.buildString = function(entry){
+			var action = entry.action;
+			var message = basicMessageString (action, entry.itemName);
+
+			if(action.indexOf('task') > -1){
+				message += ' in ' + entry.type + ': \"' + entry.documentName + '\"';
+			}
+
+			return message;
+
+		};
+
 	}
 ]);

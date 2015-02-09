@@ -48,7 +48,7 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 			}
 			$scope.taskInput = '';
 
-			$scope.template.action = 'added task';
+			$scope.template.action = 'created task';
 			$scope.template.itemName = newTask.name;
 		};
 
@@ -62,7 +62,7 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 			if(taskList){
 				taskList.splice(index,1);
 
-				$scope.template.action = 'deleted task';
+				$scope.template.action = 'removed task';
 				$scope.template.itemName = taskList[index].name;
 			}
 			else

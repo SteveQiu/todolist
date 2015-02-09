@@ -9,15 +9,26 @@ var mongoose = require('mongoose'),
 	Log = mongoose.model('Log'),
 	_ = require('lodash');
 
-function LogEntry(action, itemName, user, type, doc){
-	this.type = type;
+var enterIntoLog = function(logEntry, response){
+	var log = new Log(logEntry);
+
+	log.save(function(err) {
+		if (err) {
+			return response.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		}
+	});
+};
+
+function LogEntry(action, itemName, user, doc){
+	this.type = 'template';
 	this.document = doc;
+	this.documentName = doc.name;
 	this.action = action;
 	this.itemName = itemName;
 	this.user = user;
 }
-
-var templateType = 'template';
 
 /**
  * Create a Template
@@ -26,7 +37,7 @@ exports.create = function(req, res) {
 	var template = new Template(req.body);
 	template.user = req.user;
 
-	var logEntry = new LogEntry ('created template', req.body.name, req.user, templateType, template);
+	var logEntry = new LogEntry ('created template', req.body.name, req.user, template);
 	template.templateLog.push(logEntry);
 
 	template.save(function(err) {
@@ -39,15 +50,7 @@ exports.create = function(req, res) {
 		}
 	});
 
-	var log = new Log(logEntry);
-
-	log.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		}
-	});
+	enterIntoLog(logEntry, res);
 
 };
 
@@ -66,8 +69,8 @@ exports.update = function(req, res) {
 
 	template = _.extend(template , req.body);
 
-	var logEntryUpdate = new LogEntry(req.body.action, req.body.itemName, req.user, templateType, template);
-	template.templateLog.push(logEntryUpdate);
+	var logEntry = new LogEntry(req.body.action, req.body.itemName, req.user, template);
+	template.templateLog.push(logEntry);
 
 	template.save(function(err) {
 		if (err) {
@@ -79,15 +82,7 @@ exports.update = function(req, res) {
 		}
 	});
 
-	var log = new Log(logEntryUpdate);
-
-	log.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		}
-	});
+	enterIntoLog(logEntry, res);
 };
 
 /**
@@ -97,8 +92,8 @@ exports.archive = function(req, res) {
 	var template = req.template;
 	template.active = false;
 
-	var logEntryArchive = new LogEntry('deleted template', template.name, req.user, templateType, template);
-	template.templateLog.push(logEntryArchive);
+	var logEntry = new LogEntry('deleted template', template.name, req.user, template);
+	template.templateLog.push(logEntry);
 
 	template.save(function(err) {
 		if (err) {
@@ -110,15 +105,7 @@ exports.archive = function(req, res) {
 		}
 	});
 
-	var log = new Log(logEntryArchive);
-
-	log.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		}
-	});	
+	enterIntoLog(logEntry, res);	
 };
 
 /**

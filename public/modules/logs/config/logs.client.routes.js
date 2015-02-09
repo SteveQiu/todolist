@@ -7,7 +7,7 @@ angular.module('logs').config(['$stateProvider',
 		$stateProvider.
 		state('listLogs', {
 			url: '/logs',
-			templateUrl: 'modules/logs/views/list-logs.client.view.html'
+			templateUrl: 'modules/logs/views/newsfeed.html'
 		});
 	}
 ]);

@@ -51,7 +51,7 @@
 			<div class="row">
 			    <div data-ng-show="authentication.user" class="col-sm-3 col-md-2 Lsidebar" ng-include="'modules/core/views/leftNav.html'" scope="" onload=""></div>
 			    
-			    <div data-ng-show="authentication.user" class="col-sm-0 col-sm-offset-12 col-md-2 col-md-offset-10 Rsidebar" ng-include="'modules/core/views/newsFeed.html'" scope="" onload=""></div>
+			    <div data-ng-show="authentication.user" class="col-sm-0 col-sm-offset-12 col-md-2 col-md-offset-10 Rsidebar" ng-include="'modules/logs/views/newsFeed.html'" scope="" onload=""></div>
 
 			    <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main" ng-show='true' >{{pageUrl}}</div>
 			    <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">{% block content %}{% endblock %}</div>

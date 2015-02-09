@@ -6,7 +6,7 @@ module.exports = function(app) {
 
 	// Logs Routes
 	app.route('/logs')
-		.get(logs.list5logs)
+		.get(logs.listNewsfeed)
 		.post(users.requiresLogin, logs.create);
 
 	app.route('/logs/:logId')

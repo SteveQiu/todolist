@@ -72,7 +72,7 @@ exports.delete = function(req, res) {
  * List of Logs
  */
 exports.list = function(req, res) { 
-	Log.find().sort('-created').populate('user', 'displayName').exec(function(err, logs) {
+	Log.find().sort('-date').populate('user', 'displayName').exec(function(err, logs) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -86,8 +86,8 @@ exports.list = function(req, res) {
 /**
  * Return 5 logs
  */
-exports.list5logs = function(req, res) { 
-	Log.find().sort('-created').limit(5).populate('user', 'displayName').exec(function(err, logs) {
+exports.listNewsfeed = function(req, res) { 
+	Log.find().sort('-date').limit(5).populate('user', 'displayName').exec(function(err, logs) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

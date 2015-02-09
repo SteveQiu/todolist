@@ -1,0 +1,12 @@
+<section data-ng-controller="LogsController" data-ng-init="find()">
+	<p>My Newsfeed</p>
+	<div>
+		
+	</div>
+	<ul class="list-group news-feed">
+		<a data-ng-repeat="entry in logs" data-ng-href="{{buildUrl(entry)}}" class="list-group-item">
+				<span data-ng-bind="buildString(entry)"></span>
+				<small class="text-left" data-ng-bind="entry.user.displayName"></small>
+		</a>
+	</ul>
+</section>
