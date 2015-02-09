@@ -27,7 +27,7 @@ angular.module('core')
       return socketFactory({
           prefix: '',
           //ioSocket: io.connect(checklistSocketURL, {secure: true})
-      		ioSocket: io.connect('/', {secure: true})
+      		ioSocket: io.connect('https://teamfit-checklist.herokuapp.com/', {secure: true})
       });
     }
 	]); 
