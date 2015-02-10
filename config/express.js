@@ -24,7 +24,9 @@ var express = require('express'),
   	'match origin protocol': true,
   	'transports': 'xhr-polling', 
 	  'polling duration': 10	
-  });
+  }),
+  redis  = require('socket.io-redis'),
+  RedisStore = require('redis');
 
 module.exports = function(db) {
 	// Initialize express app
@@ -151,9 +153,15 @@ module.exports = function(db) {
 	var io = socketio.listen(server);	
   // io.set('transports', ['xhr-polling']);
   // io.set('polling duration', 10);
+  // io.set('store');
 	app.set('socketio', io);			// tie it up with the app instance so that we can access it from anywhere in our app.
 	app.set('server', server);		// storing the socket.io and the server instance in our app container.
 	server.listen(process.env.PORT || 3000);
+
+	// Export location.origin to 'host'
+	app.get('location.origin' , function(req, res, next){
+		return res.json({env: app.get('host') });
+	});
 
 	// Export process.env.NODE_ENV to 'env'
 	app.get('/nodeenv', function(req, res, next){

@@ -11,9 +11,13 @@ angular.module('core')
     return '{{=it.env}}';
 	})
 
+  .factory('host', function(){
+    return '{{=it.host}}';
+  })
+
 	.factory('Socket', ['socketFactory',
 
-    function(socketFactory, env) {
+    function(socketFactory, env, host) {
 
    //  	var checklistSocketURL;
 
@@ -23,7 +27,7 @@ angular.module('core')
 			// } else if (env === 'production') {
 			// 	checklistSocketURL = '';
 			// }
-      var host = location.origin;
+      
       return socketFactory({
           prefix: '',
           // ioSocket: io.connect(checklistSocketURL, {secure: true})
