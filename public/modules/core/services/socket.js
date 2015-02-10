@@ -32,7 +32,7 @@ angular.module('core')
           prefix: '',
           // ioSocket: io.connect(checklistSocketURL, {secure: true})
       		// ioSocket: io.connect('https://teamfit-checklist.herokuapp.com/', {secure: true})
-          ioSocket: io.connect(host, {port: 3000, transports: ['websocket']})
+          ioSocket: io.connect('/', {transports: ['websocket'], secure: true})
       });
     }
 	]); 

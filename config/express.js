@@ -156,11 +156,12 @@ module.exports = function(db) {
   // io.set('store');
 	app.set('socketio', io);			// tie it up with the app instance so that we can access it from anywhere in our app.
 	app.set('server', server);		// storing the socket.io and the server instance in our app container.
-	server.listen(process.env.PORT || 3000);
+	var port = process.env.PORT || 3000;
+	server.listen(port);
 
 	// Export location.origin to 'host'
-	app.get('location.origin' , function(req, res, next){
-		return res.json({env: app.get('host') });
+	app.get('location.origin', function(req, res, next){
+		return res.json({host: app.get('host'), port: port });
 	});
 
 	// Export process.env.NODE_ENV to 'env'
