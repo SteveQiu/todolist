@@ -5,6 +5,9 @@
 	</div>
 	<ul class="list-group news-feed">
 		<a data-ng-repeat="entry in logs" data-ng-href="{{buildUrl(entry)}}" class="list-group-item">
+				<span>
+					<em>{{entry.user.displayName}} </em>
+				</span>
 				<span data-ng-bind="buildString(entry)"></span>
 		</a>
 	</ul>

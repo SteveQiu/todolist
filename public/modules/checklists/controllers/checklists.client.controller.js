@@ -46,7 +46,7 @@ angular.module('checklists').controller('ChecklistsController', ['$scope', '$sta
 		$scope.update = function(task) {
 			var checklist = $scope.checklist;
 
-			checklist.logAction = task.isDone ? 'completed task' : 'unchecked task';
+			checklist.action = task.isDone ? 'completed task' : 'unchecked task';
 			checklist.itemName = task.name;
 
 			checklist.$update(function() {

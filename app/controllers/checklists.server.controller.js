@@ -21,7 +21,7 @@ var enterIntoLog = function(logEntry, response){
 	});
 };
 
-function LogEntry(action, itemName, user, doc){
+function LogEntry(doc, action, itemName, user){
 	this.type = 'checklist';
 	this.document = doc;
 	this.documentName = doc.name;
@@ -37,7 +37,7 @@ exports.create = function(req, res) {
 	var checklist = new Checklist(req.body);
 	checklist.user = req.user;
 
-	var logEntry = new LogEntry ('created checklist', req.body.name, req.user, checklist);
+	var logEntry = new LogEntry (checklist, 'created checklist', req.body.name, req.user);
 	checklist.checklistLog.push(logEntry);
 
 	checklist.save(function(err) {
@@ -68,7 +68,7 @@ exports.update = function(req, res) {
 
 	checklist = _.extend(checklist , req.body);
 
-	var logEntry = new LogEntry(req.body.logAction, req.body.itemName, req.user, checklist);
+	var logEntry = new LogEntry(checklist, req.body.action, req.body.itemName, req.user);
 	checklist.checklistLog.push(logEntry);
 
 	checklist.save(function(err) {
@@ -96,7 +96,7 @@ exports.archive = function(req, res) {
 	var checklist = req.checklist;
 	checklist.active = false;
 
-	var logEntry = new LogEntry('deleted checklist', checklist.name, req.user, checklist);
+	var logEntry = new LogEntry(checklist, 'deleted checklist', checklist.name, req.user);
 	checklist.checklistLog.push(logEntry);
 
 	checklist.save(function(err) {

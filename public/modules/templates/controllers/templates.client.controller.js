@@ -60,10 +60,10 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 
 		$scope.deleteTask = function(index,taskList) {
 			if(taskList){
-				taskList.splice(index,1);
-
 				$scope.template.action = 'removed task';
 				$scope.template.itemName = taskList[index].name;
+
+				taskList.splice(index,1);
 			}
 			else
 				this.taskList.splice(index,1);

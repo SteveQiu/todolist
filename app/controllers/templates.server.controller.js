@@ -21,7 +21,7 @@ var enterIntoLog = function(logEntry, response){
 	});
 };
 
-function LogEntry(action, itemName, user, doc){
+function LogEntry(doc, action, itemName, user){
 	this.type = 'template';
 	this.document = doc;
 	this.documentName = doc.name;
@@ -37,7 +37,7 @@ exports.create = function(req, res) {
 	var template = new Template(req.body);
 	template.user = req.user;
 
-	var logEntry = new LogEntry ('created template', req.body.name, req.user, template);
+	var logEntry = new LogEntry (template, 'created template', req.body.name, req.user);
 	template.templateLog.push(logEntry);
 
 	template.save(function(err) {
@@ -69,7 +69,7 @@ exports.update = function(req, res) {
 
 	template = _.extend(template , req.body);
 
-	var logEntry = new LogEntry(req.body.action, req.body.itemName, req.user, template);
+	var logEntry = new LogEntry(template, req.body.action, req.body.itemName, req.user);
 	template.templateLog.push(logEntry);
 
 	template.save(function(err) {
@@ -92,7 +92,7 @@ exports.archive = function(req, res) {
 	var template = req.template;
 	template.active = false;
 
-	var logEntry = new LogEntry('deleted template', template.name, req.user, template);
+	var logEntry = new LogEntry(template, 'deleted template', template.name, req.user);
 	template.templateLog.push(logEntry);
 
 	template.save(function(err) {
