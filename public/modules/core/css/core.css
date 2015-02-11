@@ -1,5 +1,7 @@
-.content {
+.container-fluid {
 	margin-top: 50px;
+  padding-top: 25px;
+  padding-bottom: 25px;
 }
 .undecorated-link:hover {
 	text-decoration: none;
@@ -47,31 +49,63 @@
     display: inline;
   }
 
-.nav-sidebar > .active > a,
-.nav-sidebar > .active > a:hover,
-.nav-sidebar > .active > a:focus {
-  color: #fff;
-  background-color: #428bca;
+  .nav-sidebar > .active > a,
+  .nav-sidebar > .active > a:hover,
+  .nav-sidebar > .active > a:focus {
+    color: #fff;
+    background-color: #428bca;
+  }
+
+  .news-feed :hover{
+    background-color: #eee;
+  }
+
+
+  a.checklist-button{
+    float: left;
+    width: 140px;
+  }
+
+  a.checklist-button:link, a.checklist-button:visited {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  a.checklist-button:hover {
+    color: #0abcde;
+    text-decoration: none;
+  }
 }
 
-.news-feed :hover{
-  background-color: #eee;
-}
-
-
-a.checklist-button{
+.navbar-toggle.left {
   float: left;
-  width: 140px;
 }
 
-a.checklist-button:link, a.checklist-button:visited {
-  color: #ffffff;
-  text-decoration: none;
+.navbar-toggle.visible {
+  color: #fff;
 }
 
-a.checklist-button:hover {
-  color: #0abcde;
-  text-decoration: none;
+.scrollable {
+  margin-top: 50px;
 }
 
+@media (min-width: 992px) {
+  .has-sidebar-right .app {
+    width: auto;
+    margin-right: 300px;
+    right: 0;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    -moz-transform: translate3d(0, 0, 0) !important;
+    transform: translate3d(0, 0, 0) !important;
+    position: relative;
+    -webkit-transition: -webkit-transform 0 ease;
+    -moz-transition: -moz-transform 0 ease;
+    transition: transform 0 ease;
+  }
+}
+
+@media (min-width: 1200px) {
+  .has-sidebar-right .app {
+    margin-right: 320px;
+  }
 }
