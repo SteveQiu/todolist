@@ -94,10 +94,13 @@
     width: auto;
     margin-right: 300px;
     right: 0;
+    -o-transform: translate3d(0, 0, 0) !important;
+    -ms-transform: translate3d(0, 0, 0) !important;
     -webkit-transform: translate3d(0, 0, 0) !important;
     -moz-transform: translate3d(0, 0, 0) !important;
     transform: translate3d(0, 0, 0) !important;
     position: relative;
+    -o-transition: transform 0 ease;
     -webkit-transition: -webkit-transform 0 ease;
     -moz-transition: -moz-transform 0 ease;
     transition: transform 0 ease;
