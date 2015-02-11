@@ -2,15 +2,15 @@
     <div class="page-header">
         <h1>New Template</h1>
     </div>
-    <div>
+    <div class="col-md-12">
         <form class="form-horizontal" novalidate>
             <fieldset>
                 <div class="form-group">
-                    <h2>Title</h2>
+                    <label class="control-label" for="title">Title</label>
                     <div class="controls">
                         <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
                     </div>
-                    <h3>Tasks</h3>
+                    <label class="control-label" for="tasks">Tasks</label>
                     <ul ui-sortable="taskListSortable" data-ng-model="taskList" class="list-unstyled">
                         <li ng-repeat="task in taskList track by $index">
                             <edit-in-place class="taskName" value="task.name"></edit-in-place>
