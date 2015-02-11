@@ -7,6 +7,9 @@ module.exports = {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.min.css',
 				'public/lib/bootstrap/dist/css/bootstrap-theme.min.css',
+				'public/lib/mobile-angular-ui/dist/css/mobile-angular-ui-hover.min.css',
+				'public/lib/mobile-angular-ui/dist/css/mobile-angular-ui-base.min.css',
+				'public/lib/mobile-angular-ui/dist/css/mobile-angular-ui-desktop.min.css'
 			],
 			js: [
 				'public/lib/angular/angular.min.js',
@@ -20,6 +23,7 @@ module.exports = {
 				'public/lib/angular-ui-utils/ui-utils.min.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
 				'public/lib/angular-ui-sortable/sortable.min.js',
+				'public/lib/mobile-angular-ui/dist/js/mobile-angular-ui.min.js'
 			]
 		},
 		css: 'public/dist/application.min.css',
