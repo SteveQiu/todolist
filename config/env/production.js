@@ -12,6 +12,8 @@ module.exports = {
 				'public/lib/mobile-angular-ui/dist/css/mobile-angular-ui-desktop.min.css'
 			],
 			js: [
+				'public/lib/jquery/dist/jquery.min.js',
+				'public/lib/jquery-ui/jquery-ui.min.js',
 				'public/lib/angular/angular.min.js',
 				'public/lib/angular-route/angular-route.min.js',
 				'public/lib/angular-resource/angular-resource.js', 
