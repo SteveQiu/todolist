@@ -4,7 +4,9 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'checklist';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngRoute', 'ngCookies',  'ngAnimate',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils', "ui.sortable", 'btford.socket-io'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngRoute', 'ngCookies',  'ngAnimate',
+		'ngTouch',  'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils', "ui.sortable",
+		'btford.socket-io', 'mobile-angular-ui'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {

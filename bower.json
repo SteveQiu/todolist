@@ -17,6 +17,7 @@
     "angular-ui-router": "~0.2.10",
     "angular-ui-sortable": "~0.13",
     "jquery": "~2.1.1",
-    "angular-socket-io": "~0.7.0"
+    "angular-socket-io": "~0.7.0",
+    "mobile-angular-ui": "1.1"
   }
 }
