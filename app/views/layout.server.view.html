@@ -50,9 +50,13 @@
 	<div class="app">
   	<div class="app-body">
 			<div class="app-content">
-				<section class="section container-fluid">
-					{% block content %}{% endblock %}
-				</section>
+				<div class="scrollable">
+					<div class="scrollable-content">
+						<section class="section container-fluid">
+							{% block content %}{% endblock %}
+						</section>
+					</div>
+				</div>
 			</div>
 		</div>	
 	</div>
