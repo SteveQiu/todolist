@@ -90,7 +90,7 @@ angular.module('logs').controller('LogsController', ['$scope', '$stateParams', '
 		};
 
 		// listening for the 'log.updated' event through the socket
-	    Socket.on('log.updated', function(log) {
+	  Socket.on('log.updated', function(log) {
 
 	   		//If this query proves to be too slow, could update this by
 	   		//pushing the updated log into the $scope.logs array and splicing
