@@ -4,12 +4,15 @@
 angular.module('teams').controller('TeamsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Teams',
 	function($scope, $stateParams, $location, Authentication, Teams) {
 		$scope.authentication = Authentication;
+		$scope.memberList = [];
+		$scope.memberInput = '';
 
 		// Create new Team
 		$scope.create = function() {
 			// Create new Team object
 			var team = new Teams ({
-				name: this.name
+				name: this.name,
+				members: this.memberList
 			});
 
 			// Redirect after save
@@ -21,6 +24,33 @@ angular.module('teams').controller('TeamsController', ['$scope', '$stateParams',
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
+		};
+
+		$scope.addMember = function(team) {
+			if ($scope.memberInput === '') {
+				return;
+			}
+			var newMember = {name: $scope.memberInput};
+			if(team){
+				team.push(newMember);
+			}
+			else{
+				$scope.memberList.push(newMember);
+			}
+			$scope.memberInput = '';
+		};
+
+		$scope.memberListSortable = {
+			containment: 'parent',
+			cursor: 'move',
+			tolerance: 'pointer'
+		};
+
+		$scope.deleteMember = function(index,team) {
+			if(team)
+				team.splice(index,1);
+			else
+				this.team.splice(index,1);
 		};
 
 		// Remove existing Team
@@ -61,6 +91,10 @@ angular.module('teams').controller('TeamsController', ['$scope', '$stateParams',
 			$scope.team = Teams.get({ 
 				teamId: $stateParams.teamId
 			});
+		};
+
+		$scope.checkAccess = function(){
+			return ($scope.template.user._id===$scope.authentication.user._id);
 		};
 	}
 ]);

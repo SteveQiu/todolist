@@ -23,7 +23,10 @@ var TeamSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
-	}
+	},
+	members: [{
+		name: { type: String, default:'', required: 'Please fill Member name', trim: true}
+	}]
 });
 
 mongoose.model('Team', TeamSchema);

@@ -6,17 +6,28 @@
         <form class="form-horizontal" data-ng-submit="create()" novalidate>
             <fieldset>
                 <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
+                    <label class="control-label" for="teamName">Team Name:</label>
                     <div class="controls">
                         <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
                     </div>
+                    <label class="control-label" for="members">Members:</label>
+                    <ul ui-sortable="memberListSortable" data-ng-model="memberList" class="list-unstyled">
+                        <li ng-repeat="member in memberList track by $index">
+                            <edit-in-place class="taskName" value="member.name"></edit-in-place>
+                            <!-- <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteTask($index)">&times;</button> -->
+                        </li>
+                    </ul>
+                    <div class="controls">
+                        <input type="text" ng-enter="addMember()" data-ng-model="memberInput" id="name" class="form-control" placeholder="Add new member">
+                        <button type="button" ng-click="addMember()" class="btn btn-primary" style="margin-top: 10px;">Add New Member</button>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-default">
+                    <button type="button" ng-click="create()" class="btn btn-default">Submit</button>
                 </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
+                <div data-ng-show="error" class="text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
             </fieldset>
         </form>
     </div>
