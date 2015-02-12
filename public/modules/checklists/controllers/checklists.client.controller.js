@@ -1,7 +1,7 @@
 'use strict';
 
 // Checklists controller
-angular.module('checklists').controller('ChecklistsController', ['$scope', '$stateParams', '$location', '$http', 'Socket', 'Authentication', 'Checklists',
+angular.module('checklists').controller('ChecklistsController', ['$scope', '$stateParams', '$location', '$http', 'Socket', 'Authentication', 'Checklists', 'env',
 	function($scope, $stateParams, $location, $http, Socket, Authentication, Checklists ) {
 		$scope.authentication = Authentication;
 		$scope.taskList = [];
@@ -43,8 +43,11 @@ angular.module('checklists').controller('ChecklistsController', ['$scope', '$sta
 		};
 
 		// Update existing Checklist
-		$scope.update = function() {
-			var checklist = $scope.checklist ;
+		$scope.update = function(task) {
+			var checklist = $scope.checklist;
+
+			checklist.action = task.isDone ? 'completed task' : 'unchecked task';
+			checklist.itemName = task.name;
 
 			checklist.$update(function() {
 				$location.path('checklists/' + checklist._id);
@@ -108,7 +111,7 @@ angular.module('checklists').controller('ChecklistsController', ['$scope', '$sta
 
     // listening for the 'checklist.updated' event through the socket
     Socket.on('checklist.updated', function(checklist) {
-   	
+
     	// Update the tasks of $scope.checklist from the new checklist
     	for (var i = $scope.checklist.taskList.length - 1; i >= 0; i--) {
     		$scope.checklist.taskList[i].isDone=checklist.taskList[i].isDone;

@@ -11,23 +11,28 @@ angular.module('core')
     return '{{=it.env}}';
 	})
 
+  .factory('host', function(){
+    return '{{=it.host}}';
+  })
+
 	.factory('Socket', ['socketFactory',
 
-    function(socketFactory, env) {
+    function(socketFactory, env, host) {
 
-    	var checklistSocketURL;
+   //  	var checklistSocketURL;
 
     	// Environment dependent checklistSocketURL
-			if (env === 'development') {
-				checklistSocketURL = 'https://localhost:3000';
-			} else if (env === 'production') {
-				checklistSocketURL = 'https://teamfit-checklist.herokuapp.com:3000';
-			}
-
+			// if (env === 'development') {
+			// 	checklistSocketURL = 'http://localhost:3000';
+			// } else if (env === 'production') {
+			// 	checklistSocketURL = '';
+			// }
+      
       return socketFactory({
           prefix: '',
-          ioSocket: io.connect(checklistSocketURL, {secure: true})
-//						ioSocket: io.connect(checklistSocketURL)
+          // ioSocket: io.connect(checklistSocketURL, {secure: true})
+      		// ioSocket: io.connect('https://teamfit-checklist.herokuapp.com/', {secure: true})
+          ioSocket: io.connect('/', {transports: ['websocket'], secure: true})
       });
     }
-]); 
+	]); 

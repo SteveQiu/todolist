@@ -31,7 +31,19 @@ var TemplateSchema = new Schema({
 	active: {
 		type: Boolean,
 		default: true
-	}
+	},
+	templateLog: [{
+		action: String,
+		itemName: String,
+		user: {
+			type: Schema.ObjectId,
+			ref: 'User'
+		},
+		date: {
+			type: Date,
+			default: Date.now
+		}
+	}]
 });
 
 mongoose.model('Template', TemplateSchema);

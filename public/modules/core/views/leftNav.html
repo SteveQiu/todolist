@@ -1,20 +1,13 @@
-<p>{{authentication.user.displayName}}</p>
-<ul class="nav nav-sidebar">
-	<li ng-class="{active: navTab=== 0}"><a href="#!/teams" ng-click="setTab(0)">My Team</a></li>
-	<li ng-class="{active: navTab===1}"><a href="#!/checklists" ng-click="setTab(1)">My Checklists</a></li>
-	<li ng-class="{active: navTab===2}"><a href="#!/templates" ng-click="setTab(2)">My Templates</a></li>
-</ul>
-<p>Favorites</p>
-<ul class="nav nav-sidebar">
-	<!-- We are still deciding whether to add My teams or My checklists to the recent tab or not -->
-	<!-- <li ng-class="{active: navTab===3}"><a href="#" ng-click="setTab(3)">My Team</a></li> -->
-	<!-- <li ng-class="{active: navTab===4}"><a href="#" ng-click="setTab(4)">My Checklists</a></li> -->
-	<li ng-class="{active: navTab===5}"><a href="#" ng-click="setTab(5)">Templates</a></li>
-</ul>
-<p>Recent</p>
-<ul class="nav nav-sidebar">
-	<!-- We are still deciding whether to add teams to the recent tab or not -->
-	<!-- <li ng-class="{active: navTab===6}"><a href="#" ng-click="setTab(6)">My Team</a></li> -->
-	<li ng-class="{active: navTab===7}"><a href="#" ng-click="setTab(7)">Checklists</a></li>
-	<li ng-class="{active: navTab===8}"><a href="#" ng-click="setTab(8)">Templates</a></li>
-</ul>
+<div class="scrollable">
+  <h1 class="app-name">{{authentication.user.displayName}}</h1>  
+  <div class="scrollable-content">
+    <div class="list-group" toggle="off" bubble target="mainSidebar">
+      <a class="list-group-item" href="#!/teams">My Team
+        <i class="fa fa-chevron-right pull-right"></i></a>
+      <a class="list-group-item" href="#!/checklists">My Checklists
+        <i class="fa fa-chevron-right pull-right"></i></a>
+      <a class="list-group-item" href="#!/templates">My Templates
+        <i class="fa fa-chevron-right pull-right"></i></a>
+    </div>
+  </div>
+</div>
