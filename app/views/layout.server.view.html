@@ -45,7 +45,7 @@
 <body ng-controller="HomeController">
 	<div class="navbar navbar-inverse navbar-fixed-top" ng-include="'/modules/core/views/header.client.view.html'"></div>
 	<div ng-include="'modules/core/views/leftNav.html'" class="sidebar sidebar-left" toggleable parent-active-class="sidebar-left-in" id="mainSidebar" data-ng-show="authentication.user"></div> 
-  <div ng-include="'modules/core/views/newsFeed.html'" class="sidebar sidebar-right" toggleable parent-active-class="sidebar-right-in" id="rightSidebar" data-ng-show="authentication.user"></div>
+  <div ng-include="'modules/logs/views/newsFeed.html'" class="sidebar sidebar-right" toggleable parent-active-class="sidebar-right-in" id="rightSidebar" data-ng-show="authentication.user"></div>
 
 	<div class="app">
   	<div class="app-body">

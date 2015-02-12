@@ -6,7 +6,33 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors'),
 	Template = mongoose.model('Template'),
+	Log = mongoose.model('Log'),
 	_ = require('lodash');
+
+function LogEntry(doc, action, itemName, user){
+	this.type = 'template';
+	this.document = doc;
+	this.documentName = doc.name;
+	this.action = action;
+	this.itemName = itemName;
+	this.user = user;
+}
+
+var enterIntoLog = function(logEntry, req, res){
+	var log = new Log(logEntry);
+
+	log.save(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		}
+	});
+
+	// notify every connected user about an update in the logs for the newsfeed
+	var socketio = req.app.get('socketio');
+	socketio.emit('log.updated', log); 	// emit an event for all connected clients
+};
 
 /**
  * Create a Template
@@ -14,6 +40,9 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
 	var template = new Template(req.body);
 	template.user = req.user;
+
+	var logEntry = new LogEntry (template, 'created template', req.body.name, req.user);
+	template.templateLog.push(logEntry);
 
 	template.save(function(err) {
 		if (err) {
@@ -24,6 +53,9 @@ exports.create = function(req, res) {
 			res.jsonp(template);
 		}
 	});
+
+	enterIntoLog(logEntry, req, res);
+
 };
 
 /**
@@ -41,6 +73,9 @@ exports.update = function(req, res) {
 
 	template = _.extend(template , req.body);
 
+	var logEntry = new LogEntry(template, req.body.action, req.body.itemName, req.user);
+	template.templateLog.push(logEntry);
+
 	template.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -50,6 +85,8 @@ exports.update = function(req, res) {
 			res.jsonp(template);
 		}
 	});
+
+	enterIntoLog(logEntry, req, res);
 };
 
 /**
@@ -59,6 +96,9 @@ exports.archive = function(req, res) {
 	var template = req.template;
 	template.active = false;
 
+	var logEntry = new LogEntry(template, 'deleted template', template.name, req.user);
+	template.templateLog.push(logEntry);
+
 	template.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -68,6 +108,8 @@ exports.archive = function(req, res) {
 			res.jsonp(template);
 		}
 	});
+
+	enterIntoLog(logEntry, req, res);	
 };
 
 /**
@@ -104,3 +146,4 @@ exports.hasAuthorization = function(req, res, next) {
 	}
 	next();
 };
+
