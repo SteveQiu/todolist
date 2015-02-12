@@ -9,18 +9,6 @@ var mongoose = require('mongoose'),
 	Log = mongoose.model('Log'),
 	_ = require('lodash');
 
-var enterIntoLog = function(logEntry, response){
-	var log = new Log(logEntry);
-
-	log.save(function(err) {
-		if (err) {
-			return response.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		}
-	});
-};
-
 function LogEntry(doc, action, itemName, user){
 	this.type = 'template';
 	this.document = doc;
@@ -29,6 +17,22 @@ function LogEntry(doc, action, itemName, user){
 	this.itemName = itemName;
 	this.user = user;
 }
+
+var enterIntoLog = function(logEntry, req, res){
+	var log = new Log(logEntry);
+
+	log.save(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		}
+	});
+
+	// notify every connected user about an update in the logs for the newsfeed
+	var socketio = req.app.get('socketio');
+	socketio.emit('log.updated', log); 	// emit an event for all connected clients
+};
 
 /**
  * Create a Template
@@ -50,7 +54,7 @@ exports.create = function(req, res) {
 		}
 	});
 
-	enterIntoLog(logEntry, res);
+	enterIntoLog(logEntry, req, res);
 
 };
 
@@ -82,7 +86,7 @@ exports.update = function(req, res) {
 		}
 	});
 
-	enterIntoLog(logEntry, res);
+	enterIntoLog(logEntry, req, res);
 };
 
 /**
@@ -105,7 +109,7 @@ exports.archive = function(req, res) {
 		}
 	});
 
-	enterIntoLog(logEntry, res);	
+	enterIntoLog(logEntry, req, res);	
 };
 
 /**

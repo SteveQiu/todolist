@@ -1,8 +1,8 @@
 'use strict';
 
 // Logs controller
-angular.module('logs').controller('LogsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Logs',
-	function($scope, $stateParams, $location, Authentication, Logs) {
+angular.module('logs').controller('LogsController', ['$scope', '$stateParams', '$location', 'Socket', 'Authentication', 'Logs',
+	function($scope, $stateParams, $location, Socket, Authentication, Logs ) {
 		$scope.authentication = Authentication;
 
 		// Create new Log
@@ -88,6 +88,17 @@ angular.module('logs').controller('LogsController', ['$scope', '$stateParams', '
 			return message;
 
 		};
+
+		// listening for the 'log.updated' event through the socket
+	    Socket.on('log.updated', function(log) {
+
+	   		//If this query proves to be too slow, could update this by
+	   		//pushing the updated log into the $scope.logs array and splicing
+	   		//the last entry. That might be faster but I think this should suffice
+	   		//for now.
+	    	$scope.logs = Logs.query();
+
+		});
 
 	}
 ]);
