@@ -23,7 +23,7 @@
 		<ul>
 	      	<li ng-repeat="task in checklist.taskList track by $index" >
 			    <label class="tasks-list-item">
-	        		<input type="checkbox" class="tasks-list-cb" data-ng-model="task.isDone" ng-change="update()">
+	        		<input type="checkbox" class="tasks-list-cb" data-ng-model="task.isDone" ng-change="update(task)">
 	        		<!-- <span class="tasks-list-mark"></span> -->
 	        		<i class="glyphicon glyphicon-check bigFont" ng-show="task.isDone"></i>
 	        		<i class="glyphicon glyphicon-unchecked bigFont" ng-hide="task.isDone"></i>

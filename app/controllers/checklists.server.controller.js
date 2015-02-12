@@ -6,7 +6,33 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors'),
 	Checklist = mongoose.model('Checklist'),
+	Log = mongoose.model('Log'),
 	_ = require('lodash');
+
+function LogEntry(doc, action, itemName, user){
+	this.type = 'checklist';
+	this.document = doc;
+	this.documentName = doc.name;
+	this.action = action;
+	this.itemName = itemName;
+	this.user = user;
+}
+
+var enterIntoLog = function(logEntry, req, res){
+	var log = new Log(logEntry);
+
+	log.save(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		}
+	});
+
+	// notify every connected user about an update in the logs for the newsfeed
+	var socketio = req.app.get('socketio');
+	socketio.emit('log.updated', log); 	// emit an event for all connected clients
+};
 
 /**
  * Create a Checklist
@@ -14,6 +40,9 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
 	var checklist = new Checklist(req.body);
 	checklist.user = req.user;
+
+	var logEntry = new LogEntry (checklist, 'created checklist', req.body.name, req.user);
+	checklist.checklistLog.push(logEntry);
 
 	checklist.save(function(err) {
 		if (err) {
@@ -24,6 +53,8 @@ exports.create = function(req, res) {
 			res.jsonp(checklist);
 		}
 	});
+
+	enterIntoLog(logEntry, req, res);
 };
 
 /**
@@ -41,6 +72,9 @@ exports.update = function(req, res) {
 
 	checklist = _.extend(checklist , req.body);
 
+	var logEntry = new LogEntry(checklist, req.body.action, req.body.itemName, req.user);
+	checklist.checklistLog.push(logEntry);
+
 	checklist.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -55,6 +89,8 @@ exports.update = function(req, res) {
 			res.jsonp(checklist);
 		}
 	});
+
+	enterIntoLog(logEntry, req, res);
 };
 
 /**
@@ -63,6 +99,9 @@ exports.update = function(req, res) {
 exports.archive = function(req, res) {
 	var checklist = req.checklist;
 	checklist.active = false;
+
+	var logEntry = new LogEntry(checklist, 'deleted checklist', checklist.name, req.user);
+	checklist.checklistLog.push(logEntry);
 
 	checklist.save(function(err) {
 		if (err) {
@@ -73,6 +112,8 @@ exports.archive = function(req, res) {
 			res.jsonp(checklist);
 		}
 	});
+
+	enterIntoLog(logEntry, req, res);
 };
 
 /**

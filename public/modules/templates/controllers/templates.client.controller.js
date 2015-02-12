@@ -47,6 +47,9 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 				$scope.taskList.push(newTask);
 			}
 			$scope.taskInput = '';
+
+			$scope.template.action = 'created task';
+			$scope.template.itemName = newTask.name;
 		};
 
 		$scope.taskListSortable = {
@@ -56,14 +59,19 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 		};
 
 		$scope.deleteTask = function(index,taskList) {
-			if(taskList)
+			if(taskList){
+				$scope.template.action = 'removed task';
+				$scope.template.itemName = taskList[index].name;
+
 				taskList.splice(index,1);
+			}
 			else
 				this.taskList.splice(index,1);
 		};
 
 		// Remove existing Template
 		$scope.remove = function( template ) {
+
 			if ( template ) { template.$remove();
 
 				for (var i in $scope.templates ) {

@@ -31,7 +31,19 @@ var ChecklistSchema = new Schema({
 	active: {
 		type: Boolean,
 		default: true
-	}
+	},
+	checklistLog: [{
+		action: String,
+		itemName: String,
+		user: {
+			type: Schema.ObjectId,
+			ref: 'User'
+		},
+		date: {
+			type: Date,
+			default: Date.now
+		}
+	}]
 });
 
 mongoose.model('Checklist', ChecklistSchema);

@@ -43,8 +43,11 @@ angular.module('checklists').controller('ChecklistsController', ['$scope', '$sta
 		};
 
 		// Update existing Checklist
-		$scope.update = function() {
-			var checklist = $scope.checklist ;
+		$scope.update = function(task) {
+			var checklist = $scope.checklist;
+
+			checklist.action = task.isDone ? 'completed task' : 'unchecked task';
+			checklist.itemName = task.name;
 
 			checklist.$update(function() {
 				$location.path('checklists/' + checklist._id);
