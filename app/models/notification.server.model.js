@@ -13,7 +13,7 @@ var NotificationSchema = new Schema({
 	name: {
 		type: String,
 		default: '',
-		required: 'Please fill Notification name',
+		required: 'Please fill Member name',
 		trim: true
 	},
 	created: {
@@ -23,6 +23,10 @@ var NotificationSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
+	},
+	team: {
+		type: Schema.ObjectId,
+		ref: 'Team'
 	},
 	active:{
 		type: Boolean,

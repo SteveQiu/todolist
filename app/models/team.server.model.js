@@ -25,7 +25,11 @@ var TeamSchema = new Schema({
 		ref: 'User'
 	},
 	members: [{
-		name: { type: String, default:'', required: 'Please fill Member name', trim: true}
+		_id:false,
+		id: { 
+			type: Schema.ObjectId,
+			ref:  'User'
+		}
 	}]
 });
 

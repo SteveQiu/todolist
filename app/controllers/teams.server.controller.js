@@ -6,6 +6,8 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Team = mongoose.model('Team'),
+	Notification = mongoose.model('Notification'),
+	User = mongoose.model('User'),
 	_ = require('lodash');
 
 /**
@@ -13,6 +15,7 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res) {
 	var team = new Team(req.body);
+	console.log('trying to save team');
 	team.user = req.user;
 
 	team.save(function(err) {
@@ -73,7 +76,7 @@ exports.delete = function(req, res) {
  * List of Teams
  */
 exports.list = function(req, res) { 
-	Team.find().sort('-created').populate('user', 'displayName').exec(function(err, teams) {
+	Team.find().sort('-created').populate('user', 'displayName').populate('members.id','displayName email firstName lastName').exec(function(err, teams) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -88,7 +91,7 @@ exports.list = function(req, res) {
  * Team middleware
  */
 exports.teamByID = function(req, res, next, id) { 
-	Team.findById(id).populate('user', 'displayName').exec(function(err, team) {
+	Team.findById(id).populate('user', 'displayName').populate('members.id','displayName email firstName lastName').exec(function(err, team) {
 		if (err) return next(err);
 		if (! team) return next(new Error('Failed to load Team ' + id));
 		req.team = team ;

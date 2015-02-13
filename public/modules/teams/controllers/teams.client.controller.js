@@ -1,10 +1,10 @@
 'use strict';
 
 // Teams controller
-angular.module('teams').controller('TeamsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Teams',
-	function($scope, $stateParams, $location, Authentication, Teams) {
+angular.module('teams').controller('TeamsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Teams', 'Notifications',
+	function($scope, $stateParams, $location, Authentication, Teams,Notifications) {
 		$scope.authentication = Authentication;
-		$scope.memberList = [];
+		$scope.memberList = [{id: $scope.authentication.user._id}];
 		$scope.memberInput = '';
 
 		// Create new Team
@@ -27,17 +27,32 @@ angular.module('teams').controller('TeamsController', ['$scope', '$stateParams',
 		};
 
 		$scope.addMember = function(team) {
-			if ($scope.memberInput === '') {
-				return;
-			}
-			var newMember = {name: $scope.memberInput};
-			if(team){
-				team.push(newMember);
-			}
-			else{
-				$scope.memberList.push(newMember);
-			}
-			$scope.memberInput = '';
+			// if ($scope.memberInput === '') {
+			// 	return;
+			// }
+			// var newMember = {name: $scope.memberInput};
+			// if(team){
+			// 	team.push(newMember);
+			// }
+			// else{
+			// 	$scope.memberList.push(newMember);
+			// }
+			// $scope.memberInput = '';
+			// Create new Notification object
+			var notification = new Notifications ({
+				name: $scope.memberInput,
+				team: $stateParams.teamId
+			});
+
+			// Redirect after save
+			notification.$save(function(response) {
+				// $location.path('notifications/' + response._id);
+
+				// Clear form fields
+				$scope.memberInput = '';
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
 		};
 
 		$scope.memberListSortable = {
@@ -94,7 +109,10 @@ angular.module('teams').controller('TeamsController', ['$scope', '$stateParams',
 		};
 
 		$scope.checkAccess = function(){
-			return ($scope.template.user._id===$scope.authentication.user._id);
+			if ($scope.team.user===undefined) {
+				return false;
+			}
+			return ($scope.team.user._id===$scope.authentication.user._id);
 		};
 	}
 ]);

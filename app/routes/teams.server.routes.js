@@ -3,6 +3,7 @@
 module.exports = function(app) {
 	var users = require('../../app/controllers/users.server.controller');
 	var teams = require('../../app/controllers/teams.server.controller');
+	var notifications = require('../../app/controllers/notifications.server.controller');
 
 	// Teams Routes
 	app.route('/teams')

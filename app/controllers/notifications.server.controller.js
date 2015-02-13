@@ -5,7 +5,9 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
+	Team = mongoose.model('Team'),
 	Notification = mongoose.model('Notification'),
+	User = mongoose.model('User'),
 	_ = require('lodash');
 
 /**
@@ -13,6 +15,7 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res) {
 	var notification = new Notification(req.body);
+	// console.log('trying to save notification');
 	notification.user = req.user;
 
 	notification.save(function(err) {
@@ -73,7 +76,7 @@ exports.delete = function(req, res) {
  * List of Notifications
  */
 exports.list = function(req, res) { 
-	Notification.find({user: req.user, active: true}).sort('-created').populate('user', 'displayName').exec(function(err, notifications) {
+	Notification.find({user: req.user, active: true}).sort('-created').populate('user', 'displayName').populate('team').exec(function(err, notifications) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

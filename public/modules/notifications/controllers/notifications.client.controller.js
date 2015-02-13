@@ -1,8 +1,8 @@
 'use strict';
 
 // Notifications controller
-angular.module('notifications').controller('NotificationsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Notifications',
-	function($scope, $stateParams, $location, Authentication, Notifications) {
+angular.module('notifications').controller('NotificationsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Notifications', 'Teams',
+	function($scope, $stateParams, $location, Authentication, Notifications, Teams) {
 		$scope.authentication = Authentication;
 
 		// Create new Notification
@@ -18,6 +18,35 @@ angular.module('notifications').controller('NotificationsController', ['$scope',
 
 				// Clear form fields
 				$scope.name = '';
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		$scope.accept = function(id,index) {
+
+			var tempTeam = [];
+			// var tempTeam = myTeam.members;
+			// tempTeam.push({
+			// 	id: $scope.authentication.user._id
+			// });
+
+			Teams.update({teamId:$scope.notifications[index].team._id}, 
+				{members: [{id:$scope.authentication.user._id}]}, 
+				function() {
+				$scope.notifications[index].$remove(function() {
+					$scope.notifications.splice(index,1);
+				}, function(errorResponse) {
+					$scope.error = errorResponse.data.message;
+				});
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		$scope.decline = function(index) {
+			$scope.notifications[index].$remove(function() {
+				$scope.notifications.splice(index,1);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
