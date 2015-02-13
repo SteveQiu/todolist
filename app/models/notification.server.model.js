@@ -13,7 +13,7 @@ var NotificationSchema = new Schema({
 	name: {
 		type: String,
 		default: '',
-		required: 'Please fill Member name',
+		required: 'Please enter the name of the member',
 		trim: true
 	},
 	created: {

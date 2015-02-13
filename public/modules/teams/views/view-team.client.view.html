@@ -6,10 +6,9 @@
                 	<div class="page-header">
 						<edit-in-place class="titleName" data-ng-model="team.name" value="team.name"></edit-in-place>
 					</div>
-                    {{team.members}}
                     <ul ui-sortable="memberListSortable" data-ng-model="team.members" class="list-unstyled">
                         <li class="taskItem" ng-repeat="member in team.members track by $index">
-                            <edit-in-place class="taskName" value="member.displayName"></edit-in-place>
+                            <edit-in-place class="taskName" value="member.id.displayName"></edit-in-place>
                             <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteMember($index,team.members);update()" ng-show='checkAccess()'>&times;</button>
                         </li>
                     </ul>

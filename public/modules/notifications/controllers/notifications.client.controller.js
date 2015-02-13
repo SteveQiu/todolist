@@ -26,10 +26,10 @@ angular.module('notifications').controller('NotificationsController', ['$scope',
 		$scope.accept = function(id,index) {
 
 			var tempTeam = [];
-			// var tempTeam = myTeam.members;
-			// tempTeam.push({
-			// 	id: $scope.authentication.user._id
-			// });
+			tempTeam.push($scope.notifications[index].team.members);
+			tempTeam.push({
+				id: $scope.authentication.user._id
+			});
 
 			Teams.update({teamId:$scope.notifications[index].team._id}, 
 				{members: [{id:$scope.authentication.user._id}]}, 
