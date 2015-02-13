@@ -11,8 +11,8 @@ module.exports = function(app) {
 
 	app.route('/notifications/:notificationId')
 		.get(notifications.read)
-		.put(users.requiresLogin, notifications.hasAuthorization, notifications.update)
-		.delete(users.requiresLogin, notifications.hasAuthorization, notifications.delete);
+		.put(users.requiresLogin, notifications.update)
+		.delete(users.requiresLogin, notifications.archive);
 
 	// Finish by binding the Notification middleware
 	app.param('notificationId', notifications.notificationByID);

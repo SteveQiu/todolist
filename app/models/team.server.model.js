@@ -29,7 +29,12 @@ var TeamSchema = new Schema({
 			type: Schema.ObjectId,
 			ref:  'User'
 		}
-	}]
+	}],
+	active: {
+		type: Boolean,
+		default: true
+	}
+
 });
 
 mongoose.model('Team', TeamSchema);

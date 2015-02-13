@@ -73,10 +73,30 @@ exports.delete = function(req, res) {
 };
 
 /**
+ * Archive an Team
+ */
+exports.archive = function(req, res) {
+	var team = req.team ;
+	team.active = false;
+
+	team.save(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(team);
+		}
+	});
+};
+
+/**
  * List of Teams
  */
 exports.list = function(req, res) { 
-	Team.find().sort('-created').populate('user', 'displayName').populate('members.id','displayName email firstName lastName').exec(function(err, teams) {
+	//$contains : {id: req.user._id} 
+	console.log(req.user);
+	Team.find({$or: [{user:req.user, active: true},{ members: {$elemMatch: {id: req.user._id} } } ]}).sort('-created').populate('user', 'displayName').populate('members.id','displayName email firstName lastName').exec(function(err, teams) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

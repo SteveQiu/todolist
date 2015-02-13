@@ -73,10 +73,28 @@ exports.delete = function(req, res) {
 };
 
 /**
+ * Archive an Notification
+ */
+exports.archive = function(req, res) {
+	var notification = req.notification;
+	notification.active = false;
+
+	notification.save(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(notification);
+		}
+	});
+};
+
+/**
  * List of Notifications
  */
 exports.list = function(req, res) { 
-	Notification.find({user: req.user, active: true}).sort('-created').populate('user', 'displayName').populate('team').exec(function(err, notifications) {
+	Notification.find({email:req.user.email, active: true}).sort('-created').populate('user', 'displayName').populate('team').exec(function(err, notifications) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

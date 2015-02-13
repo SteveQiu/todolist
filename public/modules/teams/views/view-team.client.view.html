@@ -6,6 +6,8 @@
                 	<div class="page-header">
 						<edit-in-place class="titleName" data-ng-model="team.name" value="team.name"></edit-in-place>
 					</div>
+                    <p>{{team}}</p>
+                    <!-- <p>{{user}}</p> -->
                     <ul ui-sortable="memberListSortable" data-ng-model="team.members" class="list-unstyled">
                         <li class="taskItem" ng-repeat="member in team.members track by $index">
                             <edit-in-place class="taskName" value="member.id.displayName"></edit-in-place>
@@ -14,8 +16,8 @@
                     </ul>
 
                     <div class="controls" ng-show='checkAccess()'>
-                        <input type="text" ng-enter="addMember(team)" data-ng-model="memberInput" id="name" class="form-control" placeholder="Add new task">
-                        <button type="button" ng-click="addMember(team)" class="btn btn-primary" style="margin-top: 10px;"><i class="glyphicon glyphicon-plus"></i> Add New Member </button>
+                        <input type="text" ng-enter="addMember()" data-ng-model="memberInput" id="name" class="form-control" placeholder="Add new task">
+                        <button type="button" ng-click="addMember()" class="btn btn-primary" style="margin-top: 10px;"><i class="glyphicon glyphicon-plus"></i> Add New Member </button>
                     </div>
                 </div>
                 <div class="form-group function">

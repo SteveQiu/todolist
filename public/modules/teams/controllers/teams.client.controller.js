@@ -1,8 +1,8 @@
 'use strict';
 
 // Teams controller
-angular.module('teams').controller('TeamsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Teams', 'Notifications', 
-	function($scope, $stateParams, $location, Authentication, Teams,Notifications) {
+angular.module('teams').controller('TeamsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Teams', 'Notifications', 'Users',
+	function($scope, $stateParams, $location, Authentication, Teams, Notifications, Users) {
 		$scope.authentication = Authentication;
 		$scope.memberList = [{id: $scope.authentication.user._id}];
 		$scope.memberInput = '';
@@ -26,14 +26,13 @@ angular.module('teams').controller('TeamsController', ['$scope', '$stateParams',
 			});
 		};
 
-		$scope.addMember = function(team) {
+		$scope.addMember = function() {
 			
-			$scope.team = Teams.get({ 
-				teamId: $stateParams.teamId
-			});
+			// $scope.user = Users.query();
+			// $scope.user = Teams.query();
 
 			var notification = new Notifications ({
-				name: $scope.memberInput,
+				email: $scope.memberInput,
 				team: $stateParams.teamId
 			});
 

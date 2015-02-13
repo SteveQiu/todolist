@@ -10,10 +10,10 @@ var mongoose = require('mongoose'),
  * Notification Schema
  */
 var NotificationSchema = new Schema({
-	name: {
+	email: {
 		type: String,
 		default: '',
-		required: 'Please enter the name of the member',
+		required: 'Please enter the email of the member',
 		trim: true
 	},
 	created: {
