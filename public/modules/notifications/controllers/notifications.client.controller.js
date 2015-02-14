@@ -25,19 +25,19 @@ angular.module('notifications').controller('NotificationsController', ['$scope',
 
 		$scope.accept = function(mem,index) {
 
-			mem.push({id: $scope.authentication.user._id})
+			mem.push({id: $scope.authentication.user._id});
 
-			Teams.update({teamId:$scope.notifications[index].team._id}, 
-				{members: mem}, 
+			Teams.update({teamId:$scope.notifications[index].team._id}, {members: mem}, 
 				function() {
 					$scope.notifications[index].$remove(function() {
-					$scope.notifications.splice(index,1);
+						$scope.notifications.splice(index,1);
+					}, function(errorResponse) {
+						$scope.error = errorResponse.data.message;
+					});
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
-				});
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
+				}
+			);
 		};
 
 		$scope.decline = function(index) {
@@ -87,5 +87,8 @@ angular.module('notifications').controller('NotificationsController', ['$scope',
 				notificationId: $stateParams.notificationId
 			});
 		};
+
+
+
 	}
 ]);

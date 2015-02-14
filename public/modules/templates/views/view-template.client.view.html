@@ -1,33 +1,6 @@
-<section data-ng-controller="TemplatesController" data-ng-init="findOne();show='true'">
-	<div ng-hide='show'>
-		<div class="page-header">
-			<h1 data-ng-bind="template.name"></h1>
-		</div>
-		<div class="pull-right" data-ng-show="authentication.user._id == template.user._id">
-			<a class="btn btn-primary" href="/#!/templates/{{template._id}}/edit">
-				<i class="glyphicon glyphicon-edit"></i>
-			</a>
-			<a class="btn btn-primary" data-ng-click="remove();">
-				<i class="glyphicon glyphicon-trash"></i>
-			</a>
-		</div>
-		<small>
-			<em class="text-muted">
-				Posted on
-				<span data-ng-bind="template.created | date:'mediumDate'"></span>
-				by
-				<span data-ng-bind="template.user.displayName"></span>
-			</em>
-		</small>
-		<ul>
-	      <li ng-repeat="task in template.taskList track by $index">
-	          {{task.name}}
-	      </li>
-	  	</ul>
-  </div>
-  <!-- Everything above is the old view. The following is the new view. -->
-  	<div>
-  		<form class="form-horizontal" ng-show='show' novalidate>
+<section data-ng-controller="TemplatesController" data-ng-init="findOne()">
+  	<div style="padding: 3%;">
+  		<form class="form-horizontal" novalidate>
             <fieldset>
                 <div class="form-group">
                 	<div class="page-header">
