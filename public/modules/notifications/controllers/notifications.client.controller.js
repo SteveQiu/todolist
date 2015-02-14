@@ -23,18 +23,14 @@ angular.module('notifications').controller('NotificationsController', ['$scope',
 			});
 		};
 
-		$scope.accept = function(id,index) {
+		$scope.accept = function(mem,index) {
 
-			var tempTeam = [];
-			tempTeam.push($scope.notifications[index].team.members);
-			tempTeam.push({
-				id: $scope.authentication.user._id
-			});
+			mem.push({id: $scope.authentication.user._id})
 
 			Teams.update({teamId:$scope.notifications[index].team._id}, 
-				{members: [{id:$scope.authentication.user._id}]}, 
+				{members: mem}, 
 				function() {
-				$scope.notifications[index].$remove(function() {
+					$scope.notifications[index].$remove(function() {
 					$scope.notifications.splice(index,1);
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;

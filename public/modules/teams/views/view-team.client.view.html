@@ -6,7 +6,7 @@
                 	<div class="page-header">
 						<edit-in-place class="titleName" data-ng-model="team.name" value="team.name"></edit-in-place>
 					</div>
-                    <p>{{team}}</p>
+                    <!-- <p>{{team}}</p> -->
                     <!-- <p>{{user}}</p> -->
                     <ul ui-sortable="memberListSortable" data-ng-model="team.members" class="list-unstyled">
                         <li class="taskItem" ng-repeat="member in team.members track by $index">

@@ -28,7 +28,8 @@ var TeamSchema = new Schema({
 		id: { 
 			type: Schema.ObjectId,
 			ref:  'User'
-		}
+		},
+		_id: false
 	}],
 	active: {
 		type: Boolean,
