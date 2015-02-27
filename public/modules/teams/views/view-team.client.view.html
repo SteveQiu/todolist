@@ -1,4 +1,4 @@
-<section data-ng-controller="TeamsController" data-ng-init="findOne()">
+<section data-ng-controller="TeamsController" data-ng-init="findOne();findTeamNotification()">
 	<div style="padding: 3%;">
   		<form class="form-horizontal" novalidate>
             <fieldset>
@@ -6,14 +6,27 @@
                 	<div class="page-header">
 						<edit-in-place class="titleName" data-ng-model="team.name" value="team.name"></edit-in-place>
 					</div>
-                    <!-- <p>{{team}}</p> -->
-                    <!-- <p>{{user}}</p> -->
-                    <ul ui-sortable="memberListSortable" data-ng-model="team.members" class="list-unstyled">
-                        <li class="taskItem" ng-repeat="member in team.members track by $index">
-                            <edit-in-place class="taskName" value="member.id.displayName"></edit-in-place>
-                            <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteMember($index,team.members);update()" ng-show='checkAccess()'>&times;</button>
+                    <p class="subTitle">Members</p>
+                    <ul>
+                        <li ng-repeat="member in team.members track by $index" class="pendingBox">
+                            <div>
+                                <span class="memberName">{{member.id.displayName}}</span>
+                                <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteMember($index,team.members);update()" ng-show='checkAccess()'>&times;</button>
+                            </div>
                         </li>
                     </ul>
+
+                    <div ng-show="notification.length">
+                        <p class="subTitle">Pending:</p>
+                        <ul>
+                            <li ng-repeat="invite in notification|filter:team.name" class="pendingBox">
+                                <span class="memberName">
+                                    {{invite.email}} - {{invite.user.displayName}}
+                                </span>
+                                <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteMember($index,team.members);update()" ng-show='checkAccess()'></button>
+                            </li>
+                        </ul>
+                    </div>
 
                     <div class="controls" ng-show='checkAccess()'>
                         <input type="text" ng-enter="addMember()" data-ng-model="memberInput" id="name" class="form-control" placeholder="Add new task">

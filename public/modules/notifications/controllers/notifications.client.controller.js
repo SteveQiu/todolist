@@ -25,15 +25,32 @@ angular.module('notifications').controller('NotificationsController', ['$scope',
 
 		$scope.accept = function(mem,index) {
 
+			var cancelNotification = function(){
+				$scope.notifications[index].$remove(function() {
+						$scope.notifications.splice(index,1);
+						// $location.path('teams');
+					}, function(errorResponse) {
+						$scope.error = errorResponse.data.message;
+					});
+			};
+
+			for (var i = mem.length - 1; i >= 0; i--) {
+				if(mem[i].id === $scope.authentication.user._id){
+					cancelNotification();
+					return true;
+				}
+			}
 			mem.push({id: $scope.authentication.user._id});
 
 			Teams.update({teamId:$scope.notifications[index].team._id}, {members: mem}, 
 				function() {
-					$scope.notifications[index].$remove(function() {
-						$scope.notifications.splice(index,1);
-					}, function(errorResponse) {
-						$scope.error = errorResponse.data.message;
-					});
+					// $scope.notifications[index].$remove(function() {
+					// 	$scope.notifications.splice(index,1);
+					// 	// $location.path('teams');
+					// }, function(errorResponse) {
+					// 	$scope.error = errorResponse.data.message;
+					// });
+					cancelNotification();
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 				}

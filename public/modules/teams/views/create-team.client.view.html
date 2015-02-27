@@ -10,21 +10,7 @@
                     <div class="controls">
                         <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
                     </div>
-                    <label class="control-label" for="members">Members:</label>
-                    <ul ui-sortable="memberListSortable" data-ng-model="memberList" class="list-unstyled">
-                        <li ng-repeat="member in memberList track by $index">
-                            <edit-in-place class="taskName" value="member.name"></edit-in-place>
-                            <!-- <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteTask($index)">&times;</button> -->
-                        </li>
-                    </ul>
-                    <div class="controls">
-                        <input type="text" ng-enter="addMember()" data-ng-model="memberInput" id="name" class="form-control" placeholder="Add new member">
-                        <button type="button" ng-click="addMember()" class="btn btn-primary" style="margin-top: 10px;">Add New Member</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="button" ng-click="create()" class="btn btn-default">Submit</button>
-                </div>
+                    <button type="button" ng-click="create()" class="btn btn-default" style="margin-top:10px;">Submit</button>
                 <div data-ng-show="error" class="text-danger">
                     <strong data-ng-bind="error"></strong>
                 </div>
