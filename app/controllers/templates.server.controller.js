@@ -115,7 +115,7 @@ exports.archive = function(req, res) {
 /**
  * List of Templates
  */
-exports.list = function(req, res) { Template.find({user: req.user, active: true}).sort('-created').populate('user', 'displayName').exec(function(err, templates) {
+exports.list = function(req, res) { Template.find({user: req.user, active: true}).sort('-created').populate('user', 'username').exec(function(err, templates) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -129,7 +129,7 @@ exports.list = function(req, res) { Template.find({user: req.user, active: true}
 /**
  * Template middleware
  */
-exports.templateByID = function(req, res, next, id) { Template.findById(id).populate('user', 'displayName').exec(function(err, template) {
+exports.templateByID = function(req, res, next, id) { Template.findById(id).populate('user', 'username').exec(function(err, template) {
 		if (err) return next(err);
 		if (! template) return next(new Error('Failed to load Template ' + id));
 		req.template = template ;

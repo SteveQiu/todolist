@@ -73,7 +73,7 @@ exports.delete = function(req, res) {
  * List of Teams
  */
 exports.list = function(req, res) { 
-	Team.find().sort('-created').populate('user', 'displayName').exec(function(err, teams) {
+	Team.find().sort('-created').populate('user', 'username').exec(function(err, teams) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -88,7 +88,7 @@ exports.list = function(req, res) {
  * Team middleware
  */
 exports.teamByID = function(req, res, next, id) { 
-	Team.findById(id).populate('user', 'displayName').exec(function(err, team) {
+	Team.findById(id).populate('user', 'username').exec(function(err, team) {
 		if (err) return next(err);
 		if (! team) return next(new Error('Failed to load Team ' + id));
 		req.team = team ;

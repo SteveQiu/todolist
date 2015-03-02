@@ -8,7 +8,7 @@
 				<ul class="list-group" toggle="off" bubble target="rightSidebar">
 					<a data-ng-repeat="entry in logs" data-ng-href="{{buildUrl(entry)}}" class="list-group-item">
 						<li>
-							<em>{{entry.user.displayName}} </em>
+							<em>{{entry.user.username}} </em>
 						</li>
 						<li data-ng-bind="buildString(entry)"></li>
 					</a>

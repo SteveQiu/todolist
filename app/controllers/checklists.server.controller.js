@@ -119,7 +119,7 @@ exports.archive = function(req, res) {
 /**
  * List of Checklists
  */
-exports.list = function(req, res) { Checklist.find({user: req.user, active: true}).sort('-created').populate('user', 'displayName').exec(function(err, checklists) {
+exports.list = function(req, res) { Checklist.find({user: req.user, active: true}).sort('-created').populate('user', 'username').exec(function(err, checklists) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -133,7 +133,7 @@ exports.list = function(req, res) { Checklist.find({user: req.user, active: true
 /**
  * Checklist middleware
  */
-exports.checklistByID = function(req, res, next, id) { Checklist.findById(id).populate('user', 'displayName').exec(function(err, checklist) {
+exports.checklistByID = function(req, res, next, id) { Checklist.findById(id).populate('user', 'username').exec(function(err, checklist) {
 		if (err) return next(err);
 		if (! checklist) return next(new Error('Failed to load Checklist ' + id));
 		req.checklist = checklist ;

@@ -25,7 +25,6 @@ module.exports = function() {
 
 			// Create the user OAuth profile
 			var providerUserProfile = {
-				displayName: profile.displayName,
 				username: profile.username,
 				provider: 'twitter',
 				providerIdentifierField: 'id_str',
