@@ -7,13 +7,13 @@ var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
 /**
- * Team Schema
+ * Notification Schema
  */
-var TeamSchema = new Schema({
-	name: {
+var NotificationSchema = new Schema({
+	email: {
 		type: String,
 		default: '',
-		required: 'Please fill Team name',
+		required: 'Please enter the email of the member',
 		trim: true
 	},
 	created: {
@@ -24,18 +24,14 @@ var TeamSchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User'
 	},
-	members: [{
-		id: { 
-			type: Schema.ObjectId,
-			ref:  'User'
-		},
-		_id: false
-	}],
-	active: {
+	team: {
+		type: Schema.ObjectId,
+		ref: 'Team'
+	},
+	active:{
 		type: Boolean,
 		default: true
 	}
-
 });
 
-mongoose.model('Team', TeamSchema);
+mongoose.model('Notification', NotificationSchema);

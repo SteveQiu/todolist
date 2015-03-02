@@ -1,53 +1,40 @@
-<section data-ng-controller="TeamsController" data-ng-init="findOne();show='true'">
-<div ng-hide='show'>
-	<div class="page-header">
-		<h1 data-ng-bind="team.name"></h1>
-	</div>
-	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == team.user._id))">
-		<a class="btn btn-primary" href="/#!/teams/{{team._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
-	</div>
-	<small>
-		<em class="text-muted">
-			Posted on
-			<span data-ng-bind="team.created | date:'mediumDate'"></span>
-			by
-			<span data-ng-bind="team.user.username"></span>
-		</em>
-	</small>
-	<ul>
-	      <li ng-repeat="member in team.members track by $index">
-	          {{member.name}}
-	      </li>
-	</ul>
-</div>
-<!-- Everything above is the old view. The following is the new view. -->
-	<div>
-  		<form class="form-horizontal" ng-show='show' novalidate>
+<section data-ng-controller="TeamsController" data-ng-init="findOne();findTeamNotification()">
+	<div style="padding: 3%;">
+  		<form class="form-horizontal" novalidate>
             <fieldset>
                 <div class="form-group">
                 	<div class="page-header">
 						<edit-in-place class="titleName" data-ng-model="team.name" value="team.name"></edit-in-place>
 					</div>
-
-                    <ul ui-sortable="memberListSortable" data-ng-model="team.members" class="list-unstyled">
-                        <li class="taskItem" ng-repeat="member in team.members track by $index">
-                            <edit-in-place class="taskName" value="member.name"></edit-in-place>
-                            <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteMember($index,team.members);update()" ng-show='checkAccess()'>&times;</button>
+                    <p class="subTitle">Members</p>
+                    <ul>
+                        <li ng-repeat="member in team.members track by $index" class="pendingBox">
+                            <div>
+                                <span class="memberName">{{member.id.username}}</span>
+                                <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteMember($index,team.members);update()" ng-show='checkAccess()'>&times;</button>
+                            </div>
                         </li>
                     </ul>
 
+                    <div ng-show="notification.length">
+                        <p class="subTitle">Pending:</p>
+                        <ul>
+                            <li ng-repeat="invite in notification|filter:team.name" class="pendingBox">
+                                <span class="memberName">
+                                    {{invite.email}} - {{invite.user.username}}
+                                </span>
+                                <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteMember($index,team.members);update()" ng-show='checkAccess()'></button>
+                            </li>
+                        </ul>
+                    </div>
+
                     <div class="controls" ng-show='checkAccess()'>
-                        <input type="text" ng-enter="addMember(team.members);update()" data-ng-model="memberInput" id="name" class="form-control" placeholder="Add new task">
-                        <button type="button" ng-click="addMember(team.members);update()" class="btn btn-primary" style="margin-top: 10px;"><i class="glyphicon glyphicon-plus"></i> Add New Member </button>
+                        <input type="text" ng-enter="addMember()" data-ng-model="memberInput" id="name" class="form-control" placeholder="Add new task">
+                        <button type="button" ng-click="addMember()" class="btn btn-primary" style="margin-top: 10px;"><i class="glyphicon glyphicon-plus"></i> Add New Member </button>
                     </div>
                 </div>
                 <div class="form-group function">
-                	<a class="btn btn-primary functionButton" href="#!/templates">
+                	<a class="btn btn-primary functionButton" href="#!/teams">
 						<i class="glyphicon glyphicon-th-list"></i> Back To List
 					</a>
 					<span ng-show='checkAccess()'>

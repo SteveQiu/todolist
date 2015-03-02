@@ -1,10 +1,11 @@
 'use strict';
 
 // Teams controller
-angular.module('teams').controller('TeamsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Teams',
-	function($scope, $stateParams, $location, Authentication, Teams) {
+angular.module('teams').controller('TeamsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Teams', 'Notifications', 'Users',
+	function($scope, $stateParams, $location, Authentication, Teams, Notifications, Users) {
 		$scope.authentication = Authentication;
-		$scope.memberList = [];
+		// $scope.memberList = [{id: $scope.authentication.user._id}];
+		// $scope.inviteList = [];
 		$scope.memberInput = '';
 
 		// Create new Team
@@ -12,7 +13,7 @@ angular.module('teams').controller('TeamsController', ['$scope', '$stateParams',
 			// Create new Team object
 			var team = new Teams ({
 				name: this.name,
-				members: this.memberList
+				members: [{id: $scope.authentication.user._id}]
 			});
 
 			// Redirect after save
@@ -26,18 +27,29 @@ angular.module('teams').controller('TeamsController', ['$scope', '$stateParams',
 			});
 		};
 
-		$scope.addMember = function(team) {
-			if ($scope.memberInput === '') {
-				return;
-			}
-			var newMember = {name: $scope.memberInput};
-			if(team){
-				team.push(newMember);
-			}
-			else{
-				$scope.memberList.push(newMember);
-			}
-			$scope.memberInput = '';
+		// $scope.invite = function() {
+		// 	if ($scope.memberInput === '') {
+		// 		return;
+		// 	}
+		// 	var newMember = {email: $scope.memberInput};
+		// 	$scope.inviteList.push(newMember);
+		// 	$scope.memberInput = '';
+
+		// };
+
+		$scope.addMember = function() {
+
+			var notification = new Notifications ({
+				email: $scope.memberInput,
+				team: $stateParams.teamId
+			});
+
+			notification.$save(function(response) {
+				// Clear form fields
+				$scope.memberInput = '';
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
 		};
 
 		$scope.memberListSortable = {
@@ -93,8 +105,20 @@ angular.module('teams').controller('TeamsController', ['$scope', '$stateParams',
 			});
 		};
 
-		$scope.checkAccess = function(){
-			return ($scope.template.user._id===$scope.authentication.user._id);
+		$scope.findTeamNotification = function() {
+			$scope.notification = Notifications.query();
 		};
+
+		$scope.checkAccess = function(){
+			if ($scope.team.user===undefined) {
+				return false;
+			}
+			return ($scope.team.user._id===$scope.authentication.user._id);
+		};
+
+		
+		// $scope.pop = function(message){
+		// 	$scope.append('<div id="alert">ALL data was saved</div>');
+		// };
 	}
 ]);

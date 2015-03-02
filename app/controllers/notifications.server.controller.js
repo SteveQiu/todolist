@@ -11,119 +11,117 @@ var mongoose = require('mongoose'),
 	_ = require('lodash');
 
 /**
- * Create a Team
+ * Create a Notification
  */
 exports.create = function(req, res) {
-	var team = new Team(req.body);
-	console.log('trying to save team');
-	team.user = req.user;
+	var notification = new Notification(req.body);
+	// console.log('trying to save notification');
+	notification.user = req.user;
 
-	team.save(function(err) {
+	notification.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(team);
+			res.jsonp(notification);
 		}
 	});
 };
 
 /**
- * Show the current Team
+ * Show the current Notification
  */
 exports.read = function(req, res) {
-	res.jsonp(req.team);
+	res.jsonp(req.notification);
 };
 
 /**
- * Update a Team
+ * Update a Notification
  */
 exports.update = function(req, res) {
-	var team = req.team ;
+	var notification = req.notification ;
 
-	team = _.extend(team , req.body);
+	notification = _.extend(notification , req.body);
 
-	team.save(function(err) {
+	notification.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(team);
+			res.jsonp(notification);
 		}
 	});
 };
 
 /**
- * Delete an Team
+ * Delete an Notification
  */
 exports.delete = function(req, res) {
-	var team = req.team ;
+	var notification = req.notification ;
 
-	team.remove(function(err) {
+	notification.remove(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(team);
+			res.jsonp(notification);
 		}
 	});
 };
 
 /**
- * Archive an Team
+ * Archive an Notification
  */
 exports.archive = function(req, res) {
-	var team = req.team ;
-	team.active = false;
+	var notification = req.notification;
+	notification.active = false;
 
-	team.save(function(err) {
+	notification.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(team);
+			res.jsonp(notification);
 		}
 	});
 };
 
 /**
- * List of Teams
+ * List of Notifications
  */
 exports.list = function(req, res) { 
-	//$contains : {id: req.user._id} 
-	console.log(req.user);
-	Team.find({$or: [{user:req.user, active: true},{ members: {$elemMatch: {id: req.user._id} } } ]}).sort('-created').populate('user', 'username').populate('members.id','username email').exec(function(err, teams) {
+	Notification.find({email:req.user.email, active: true}).sort('-created').populate('user', 'username').populate('team').exec(function(err, notifications) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(teams);
+			res.jsonp(notifications);
 		}
 	});
 };
 
 /**
- * Team middleware
+ * Notification middleware
  */
-exports.teamByID = function(req, res, next, id) { 
-	Team.findById(id).populate('user', 'username').populate('members.id','username email').exec(function(err, team) {
+exports.notificationByID = function(req, res, next, id) { 
+	Notification.findById(id).populate('user', 'username').exec(function(err, notification) {
 		if (err) return next(err);
-		if (! team) return next(new Error('Failed to load Team ' + id));
-		req.team = team ;
+		if (! notification) return next(new Error('Failed to load Notification ' + id));
+		req.notification = notification ;
 		next();
 	});
 };
 
 /**
- * Team authorization middleware
+ * Notification authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.team.user.id !== req.user.id) {
+	if (req.notification.user.id !== req.user.id) {
 		return res.status(403).send('User is not authorized');
 	}
 	next();

@@ -3,6 +3,7 @@
 module.exports = function(app) {
 	var users = require('../../app/controllers/users.server.controller');
 	var teams = require('../../app/controllers/teams.server.controller');
+	var notifications = require('../../app/controllers/notifications.server.controller');
 
 	// Teams Routes
 	app.route('/teams')
@@ -11,8 +12,8 @@ module.exports = function(app) {
 
 	app.route('/teams/:teamId')
 		.get(teams.read)
-		.put(users.requiresLogin, teams.hasAuthorization, teams.update)
-		.delete(users.requiresLogin, teams.hasAuthorization, teams.delete);
+		.put(users.requiresLogin, teams.update)
+		.delete(users.requiresLogin, teams.hasAuthorization, teams.archive);
 
 	// Finish by binding the Team middleware
 	app.param('teamId', teams.teamByID);

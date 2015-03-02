@@ -111,7 +111,10 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 		};
 
 		$scope.checkCreator = function(){
-			return ($scope.template.user._id===$scope.authentication.user._id);
+			if ($scope.template.user===undefined) {
+				return false;
+			}
+			return ($scope.template.user===$scope.authentication.user);
 		};
 
 	}
