@@ -29,6 +29,6 @@ EXPOSE 3000 35729
 CMD ["grunt"]
 
 # Heroku deployment instruction
-$ grunt build
-$ NODE_ENV=PRODUCTION grunt build
-$ git push heroku origin
+# grunt build
+# NODE_ENV=PRODUCTION grunt build
+# git push heroku origin
