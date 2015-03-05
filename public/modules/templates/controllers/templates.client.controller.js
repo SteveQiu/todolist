@@ -138,7 +138,7 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 		};
 
 		// modal
-		$scope.items = ['item1', 'item2', 'item3'];
+		$scope.items = ['Team A', 'Team B', 'Team C'];
 
 		$scope.open = function (size) {
 
@@ -164,9 +164,9 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 }]);
 
 angular.module('templates').controller('ModalInstanceCtrl', ['$scope', '$modalInstance', 'items',
-	function($scope, $modalInstance, items) {
-		$scope.items = items;
-		$scope.selected = {
+function($scope, $modalInstance, items) {
+	$scope.items = items;
+	$scope.selected = {
 		item: $scope.items[0]
 	};
 

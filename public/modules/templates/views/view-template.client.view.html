@@ -23,11 +23,11 @@
                 	<a class="btn btn-primary functionButton" href="#!/templates">
 						<i class="glyphicon glyphicon-th-list"></i> Back To List
 					</a>
-					<!-- <a class="btn btn-primary functionButton" href="#!/checklists/create/{{template._id}}" ng-click="setTab(1)">
-						<i class="glyphicon glyphicon-check"></i> Use Checklist
-					</a> -->
                     <button type="button" ng-click="useChecklist()" class="btn btn-primary functionButton">
                         <i class="glyphicon glyphicon-check"></i> Use Checklist
+                    </button>
+                    <button type="button" ng-click="open(sm)" class="btn btn-primary functionButton">
+                        <i class="glyphicon glyphicon-check"></i> Use as Team Checklist
                     </button>
 
 					<span ng-show='checkCreator()'>
@@ -50,7 +50,7 @@
     <!-- modal -->
     <script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
-            <h3 class="modal-title">I am a modal!</h3>
+            <h3 class="modal-title">Teams</h3>
         </div>
         <div class="modal-body">
             <ul>
@@ -66,11 +66,7 @@
         </div>
     </script>
 
-    <button class="btn btn-default" ng-click="open()">Open me!</button>
-    <button class="btn btn-default" ng-click="open('lg')">Large modal</button>
-    <button class="btn btn-default" ng-click="open('sm')">Small modal</button>
     <div ng-show="selected">Selection from a modal: {{ selected }}</div>
 
-    
 </section>
 
