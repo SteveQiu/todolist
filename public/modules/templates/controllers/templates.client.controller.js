@@ -3,8 +3,8 @@
 // angular.module('templates', ['ui.bootstrap']);
 
 // Templates controller
-angular.module('templates').controller('TemplatesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Templates','Checklists','$modal',
-	function($scope, $stateParams, $location, Authentication, Templates , Checklists, $modal) {
+angular.module('templates').controller('TemplatesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Templates','Checklists','$modal','Teams',
+	function($scope, $stateParams, $location, Authentication, Templates , Checklists, $modal, Teams) {
 		$scope.authentication = Authentication;
 		$scope.taskList = [];
 		$scope.taskInput = '';
@@ -138,23 +138,42 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 		};
 
 		// modal
-		$scope.items = ['Team A', 'Team B', 'Team C'];
+		
 
 		$scope.open = function (size) {
+			// $scope.items = ['Team A', 'Team B', 'Team C'];
+			$scope.teams = Teams.query();
 
 		    var modalInstance = $modal.open({
 					templateUrl: 'myModalContent.html',
 					controller: 'ModalInstanceCtrl',
 					size: size,
 					resolve: {
-						items: function () {
-						  return $scope.items;
+						teams: function () {
+						  return $scope.teams;
 						}
 		    		}
 		    });
 
 		    modalInstance.result.then(function (selectedItem) {
-		      $scope.selected = selectedItem;
+		    	// register checklist with team name
+		    	var checklist = new Checklists ({
+					name: $scope.template.name,
+					team: selectedItem._id,
+					taskList: $scope.template.taskList
+				});
+
+				$scope.checklist = checklist;
+
+				// Redirect after save
+				checklist.$save(function(response) {
+					$location.path('checklists/' + response._id);
+				}, function(errorResponse) {
+					$scope.error = errorResponse.data.message;
+				});
+
+		    	// show selected team
+		    	// $scope.selected = selectedItem;
 		    }, function () {
 		      // $log.info('Modal dismissed at: ' + new Date());
 		    });
@@ -163,15 +182,15 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 
 }]);
 
-angular.module('templates').controller('ModalInstanceCtrl', ['$scope', '$modalInstance', 'items',
-function($scope, $modalInstance, items) {
-	$scope.items = items;
+angular.module('templates').controller('ModalInstanceCtrl', ['$scope', '$modalInstance', 'teams',
+function($scope, $modalInstance, teams) {
+	$scope.teams = teams;
 	$scope.selected = {
-		item: $scope.items[0]
+		item: $scope.teams[0]
 	};
 
 	$scope.ok = function () {
-		$modalInstance.close($scope.selected.item);
+		$modalInstance.close($scope.selected.team);
 	};
 
 	$scope.cancel = function () {
