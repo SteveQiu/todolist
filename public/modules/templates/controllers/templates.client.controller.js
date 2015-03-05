@@ -1,8 +1,10 @@
 'use strict';
 
+// angular.module('templates', ['ui.bootstrap']);
+
 // Templates controller
-angular.module('templates').controller('TemplatesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Templates',
-	function($scope, $stateParams, $location, Authentication, Templates ) {
+angular.module('templates').controller('TemplatesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Templates','Checklists','$modal',
+	function($scope, $stateParams, $location, Authentication, Templates , Checklists, $modal) {
 		$scope.authentication = Authentication;
 		$scope.taskList = [];
 		$scope.taskInput = '';
@@ -34,6 +36,24 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 				$scope.error = errorResponse.data.message;
 			});
 		};
+
+		$scope.useChecklist = function() {
+
+                var checklist = new Checklists ({
+					name: $scope.template.name,
+					taskList: $scope.template.taskList
+				});
+
+				$scope.checklist = checklist;
+
+				// Redirect after save
+				checklist.$save(function(response) {
+					$location.path('checklists/' + response._id);
+				}, function(errorResponse) {
+					$scope.error = errorResponse.data.message;
+				});
+
+    	};
 
 		$scope.addTask = function(template) {
 			if ($scope.taskInput === '') {
@@ -117,5 +137,45 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 			return ($scope.template.user===$scope.authentication.user);
 		};
 
-	}
-]);
+		// modal
+		$scope.items = ['item1', 'item2', 'item3'];
+
+		$scope.open = function (size) {
+
+		    var modalInstance = $modal.open({
+					templateUrl: 'myModalContent.html',
+					controller: 'ModalInstanceCtrl',
+					size: size,
+					resolve: {
+						items: function () {
+						  return $scope.items;
+						}
+		    		}
+		    });
+
+		    modalInstance.result.then(function (selectedItem) {
+		      $scope.selected = selectedItem;
+		    }, function () {
+		      // $log.info('Modal dismissed at: ' + new Date());
+		    });
+
+		};
+
+}]);
+
+angular.module('templates').controller('ModalInstanceCtrl', ['$scope', '$modalInstance', 'items',
+	function($scope, $modalInstance, items) {
+		$scope.items = items;
+		$scope.selected = {
+		item: $scope.items[0]
+	};
+
+	$scope.ok = function () {
+		$modalInstance.close($scope.selected.item);
+	};
+
+	$scope.cancel = function () {
+		$modalInstance.dismiss('cancel');
+	};
+
+}]);

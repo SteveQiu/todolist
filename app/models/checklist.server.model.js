@@ -24,6 +24,10 @@ var ChecklistSchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User'
 	},
+	team: {
+		type: Schema.ObjectId,
+		ref: 'Team'
+	},
 	taskList: [{
 		name: { type: String, default:'', required: 'Please fill Task name', trim: true},
 		isDone: { type: Boolean, default: false}

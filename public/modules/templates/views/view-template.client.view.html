@@ -23,17 +23,21 @@
                 	<a class="btn btn-primary functionButton" href="#!/templates">
 						<i class="glyphicon glyphicon-th-list"></i> Back To List
 					</a>
-					<a class="btn btn-primary functionButton" href="#!/checklists/create/{{template._id}}" ng-click="setTab(1)">
+					<!-- <a class="btn btn-primary functionButton" href="#!/checklists/create/{{template._id}}" ng-click="setTab(1)">
 						<i class="glyphicon glyphicon-check"></i> Use Checklist
-					</a>
+					</a> -->
+                    <button type="button" ng-click="useChecklist()" class="btn btn-primary functionButton">
+                        <i class="glyphicon glyphicon-check"></i> Use Checklist
+                    </button>
+
 					<span ng-show='checkCreator()'>
-                    <button type="button" ng-click="update()" value="Update" class="btn btn-primary functionButton"><i class="glyphicon glyphicon-cloud-upload"></i> Update</button>
-                    <a class="btn btn-primary functionButton" data-ng-click="create(template);">
-						<i class="glyphicon glyphicon-list-alt"></i> Make A Copy
-					</a>
-                    <a class="btn btn-primary functionButton" data-ng-click="remove();">
-						<i class="glyphicon glyphicon-trash"></i> Delete
-					</a>
+                        <button type="button" ng-click="update()" value="Update" class="btn btn-primary functionButton"><i class="glyphicon glyphicon-cloud-upload"></i> Update</button>
+                        <a class="btn btn-primary functionButton" data-ng-click="create(template);">
+    						<i class="glyphicon glyphicon-list-alt"></i> Make A Copy
+    					</a>
+                        <a class="btn btn-primary functionButton" data-ng-click="remove();">
+    						<i class="glyphicon glyphicon-trash"></i> Delete
+    					</a>
 					</span>
                 </div>
 				<div data-ng-show="error" class="text-danger">
@@ -42,4 +46,31 @@
             </fieldset>
         </form>
     </div>
+
+    <!-- modal -->
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">I am a modal!</h3>
+        </div>
+        <div class="modal-body">
+            <ul>
+                <li ng-repeat="item in items">
+                    <a ng-click="selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+    <button class="btn btn-default" ng-click="open()">Open me!</button>
+    <button class="btn btn-default" ng-click="open('lg')">Large modal</button>
+    <button class="btn btn-default" ng-click="open('sm')">Small modal</button>
+    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+
+    
 </section>
+
