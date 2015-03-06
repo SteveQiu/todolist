@@ -93,9 +93,7 @@ exports.archive = function(req, res) {
 /**
  * List of Teams
  */
-exports.list = function(req, res) { 
-	//$contains : {id: req.user._id} 
-	console.log(req.user);
+exports.list = function(req, res) {
 	Team.find({$or: [{user:req.user, active: true},{ members: {$elemMatch: {id: req.user._id} } } ]}).sort('-created').populate('user', 'username').populate('members.id','username email').exec(function(err, teams) {
 		if (err) {
 			return res.status(400).send({

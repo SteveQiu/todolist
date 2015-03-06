@@ -119,7 +119,10 @@ exports.archive = function(req, res) {
 /**
  * List of Checklists
  */
-exports.list = function(req, res) { Checklist.find({user: req.user, active: true}).sort('-created').populate('user', 'username').exec(function(err, checklists) {
+exports.list = function(req, res) { 
+	console.log(req);
+
+	Checklist.find({user: req.user, active: true}).sort('-created').populate('user', 'username').exec(function(err, checklists) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
