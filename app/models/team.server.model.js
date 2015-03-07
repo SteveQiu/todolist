@@ -31,6 +31,10 @@ var TeamSchema = new Schema({
 		},
 		_id: false
 	}],
+	checklists: [{
+			type: Schema.ObjectId,
+			ref:  'Checklist'
+	}],
 	active: {
 		type: Boolean,
 		default: true

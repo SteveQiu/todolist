@@ -134,7 +134,7 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 			if ($scope.template.user===undefined) {
 				return false;
 			}
-			return ($scope.template.user===$scope.authentication.user);
+			return ($scope.template.user._id===$scope.authentication.user._id||false);
 		};
 
 		// modal
@@ -159,21 +159,33 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 		    	// register checklist with team name
 		    	var checklist = new Checklists ({
 					name: $scope.template.name,
-					team: selectedItem._id,
+					team: $scope.teams[selectedItem]._id,
 					taskList: $scope.template.taskList
 				});
-
-				$scope.checklist = checklist;
-
-				// Redirect after save
 				checklist.$save(function(response) {
-					$location.path('checklists/' + response._id);
+					// push method 1
+					var checklists=[];
+					var team = $scope.teams[selectedItem];
+					for (var i = team.checklists.length - 1; i >= 0; i--) {
+						checklists.push(team.checklists[i]._id);
+					}
+					checklists.push(response._id);
+					team.checklists=checklists;
+					// after creating the checklist
+					// update the team , response._id contains checklist id
+					// push method 2
+					// $scope.teams[selectedItem].checklists.push(response._id);
+					team.$update(function() {
+						// Redirect after save
+						$location.path('checklists/' + response._id);
+					}, function(errorResponse) {
+						// alert('fail');
+						$scope.error = errorResponse.data.message;
+					});
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 				});
 
-		    	// show selected team
-		    	// $scope.selected = selectedItem;
 		    }, function () {
 		      // $log.info('Modal dismissed at: ' + new Date());
 		    });
@@ -185,12 +197,16 @@ angular.module('templates').controller('TemplatesController', ['$scope', '$state
 angular.module('templates').controller('ModalInstanceCtrl', ['$scope', '$modalInstance', 'teams',
 function($scope, $modalInstance, teams) {
 	$scope.teams = teams;
-	$scope.selected = {
-		item: $scope.teams[0]
+	// default init
+	$scope.selected = 0;
+
+	$scope.choose = function (index) {
+		$scope.selected = index;
 	};
 
-	$scope.ok = function () {
-		$modalInstance.close($scope.selected.team);
+	$scope.ok = function (index) {
+		// $modalInstance.close($scope.selected.team);
+		$modalInstance.close($scope.selected);
 	};
 
 	$scope.cancel = function () {

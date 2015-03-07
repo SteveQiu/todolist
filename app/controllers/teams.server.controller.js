@@ -94,7 +94,9 @@ exports.archive = function(req, res) {
  * List of Teams
  */
 exports.list = function(req, res) {
-	Team.find({$or: [{user:req.user, active: true},{ members: {$elemMatch: {id: req.user._id} } } ]}).sort('-created').populate('user', 'username').populate('members.id','username email').exec(function(err, teams) {
+	Team.find({$or: [{user:req.user, active: true},{ members: {$elemMatch: {id: req.user._id} } } ]})
+	.sort('-created').populate('user', 'username').populate('members.id','username email').populate('checklists')
+	.exec(function(err, teams) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -109,7 +111,9 @@ exports.list = function(req, res) {
  * Team middleware
  */
 exports.teamByID = function(req, res, next, id) { 
-	Team.findById(id).populate('user', 'username').populate('members.id','username email').exec(function(err, team) {
+	Team.findById(id).populate('user', 'username').populate('members.id','username email')
+	.populate('checklists')
+	.exec(function(err, team) {
 		if (err) return next(err);
 		if (! team) return next(new Error('Failed to load Team ' + id));
 		req.team = team ;

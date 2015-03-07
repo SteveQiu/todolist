@@ -64,7 +64,8 @@ angular.module('checklists').controller('ChecklistsController', ['$scope', '$sta
 		// Find a list of Checklists with a specific team ID
 		$scope.findTeamChecklist = function(teamId) {
 			$scope.checklists = Checklists.query(
-				{ team : teamId}
+				// 'zxcvbn'
+				 { team : teamId}
 			);
 		};
 

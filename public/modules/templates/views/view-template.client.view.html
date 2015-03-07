@@ -29,7 +29,6 @@
                     <button type="button" ng-click="open(sm)" class="btn btn-primary functionButton">
                         <i class="glyphicon glyphicon-check"></i> Use as Team Checklist
                     </button>
-
 					<span ng-show='checkCreator()'>
                         <button type="button" ng-click="update()" value="Update" class="btn btn-primary functionButton"><i class="glyphicon glyphicon-cloud-upload"></i> Update</button>
                         <a class="btn btn-primary functionButton" data-ng-click="create(template);">
@@ -54,19 +53,19 @@
         </div>
         <div class="modal-body">
             <ul>
-                <li ng-repeat="team in teams">
-                    <a ng-click="selected.team = team">{{ team.name }}</a>
+                <li ng-repeat="team in teams track by $index">
+                    <a ng-click="choose($index)">{{ team.name }}</a>
                 </li>
             </ul>
-            Selected: <b>{{ selected.team }}</b>
+            You Selected: <b> {{teams[selected].name}}</b>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-primary" ng-click="ok($index)">OK</button>
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         </div>
     </script>
 
-    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+    <div ng-show="selected">Selection from a modal: {{ selected }} - </div>
 
 </section>
 

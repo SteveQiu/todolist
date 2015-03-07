@@ -116,9 +116,5 @@ angular.module('teams').controller('TeamsController', ['$scope', '$stateParams',
 			return ($scope.team.user._id===$scope.authentication.user._id);
 		};
 
-		
-		// $scope.pop = function(message){
-		// 	$scope.append('<div id="alert">ALL data was saved</div>');
-		// };
 	}
 ]);
