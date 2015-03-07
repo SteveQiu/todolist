@@ -16,12 +16,19 @@
 }
 
 .in-one-line{
-  margin-left: auto;
-  margin-right: auto;
-  width: 200%;
+  display: block;
+  white-space:nowrap;
 }
 
 .nugg-logo-small{
 	margin: 5px;
 }
 
+.centerInput{
+	margin-right:auto; 
+	margin-left:auto;
+}
+
+.sign{
+	margin-top: 10%;
+}

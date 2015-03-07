@@ -1,6 +1,6 @@
-<section class="row" data-ng-controller="AuthenticationController">
+<section class="sign row" data-ng-controller="AuthenticationController">
 	<h3 class="col-md-12 text-center">Let's Sign up!</h3>
-	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
+	<div class="col-xs-offset-2 col-xs-8 col-md-offset-2 col-md-8">
 		<form name="userForm" data-ng-submit="signup()" class="signin form-horizontal" novalidate autocomplete="off">
 			<fieldset>
 				<div class="form-group">
@@ -15,7 +15,7 @@
 					<label for="password">Password</label>
 					<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password" ng-required>
 				</div>
-				<div class="form-group in-one-line">
+				<div class="form-group in-one-line text-center">
 					<button type="submit" class="btn btn-large btn-primary">Sign up</button>&nbsp; or&nbsp;
 					<a href="/#!/signin" class="show-signup">Sign in</a>
 				</div>
