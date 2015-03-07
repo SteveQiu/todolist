@@ -31,7 +31,10 @@
 	  	</ul>
 	</small>
 	<div class="form-group function">
-		<a class="btn btn-primary" href="#!/checklists">
+		<a class="btn btn-primary" href="#!/teams/{{checklist.team}}" ng-show="checklist.team">
+			<i class="glyphicon glyphicon-th-list"></i> Back To Team
+		</a>
+		<a class="btn btn-primary" href="#!/checklists" ng-hide="checklist.team">
 			<i class="glyphicon glyphicon-th-list"></i> Back To List
 		</a>
 
