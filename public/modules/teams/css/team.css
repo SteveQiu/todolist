@@ -1,13 +1,45 @@
-.pendingBox{
-	margin-top: 5px;
-	margin-bottom: 12px;
+.memberBox{
+	float: left;
+	font-size: 25px;
+	font-weight: bold;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	border: 2px solid #CCC;
+	margin-right: 2%;
+	margin-bottom: 3%;
+}
+.memberBox:hover{
+	background-color: #28F;
+	border-color: transparent;
+	color: #FFF;
 }
 
-.memberName{
-	font-size: 25px;
-	padding-bottom: 2px;
-	/*font-weight: bold;*/
-	margin-left:  30px;
+.memberBox span{
+	margin: 35%;
+}
+
+.memberBox span span{
+	position: relative;
+	left: -40%;
+	top: -10%;
+}
+
+.deleteBox{
+	position: relative;
+	left: 60%;
+	top: -170%;
+	font-size: 8px;
+	border-radius: 50%;
+	background-color: transparent;
+	border:none;
+	color: transparent;
+}
+
+.memberBox:hover .deleteBox{
+	color: white;
+	background-color: red;
+	border: 2px solid #CCC;
 }
 
 .subTitle{

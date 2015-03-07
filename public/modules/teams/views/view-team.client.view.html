@@ -8,25 +8,15 @@
 					</div>
                     <p class="subTitle">Members</p>
                     <ul>
-                        <li ng-repeat="member in team.members track by $index" class="pendingBox">
-                            <div>
-                                <span class="memberName">{{member.id.username}}</span>
-                                <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteMember($index,team.members);update()" ng-show='checkAccess()'>&times;</button>
+                        <li ng-repeat="member in team.members track by $index">
+                            <div class="memberBox">
+                                <span>
+                                    <span>{{member.id.username}}</span>
+                                    <button type="button" class="deleteBox" aria-hidden="true" ng-click="deleteMember($index,team.members);update()" ng-show='checkAccess()'>&times;</button>
+                                </span>
                             </div>
                         </li>
                     </ul>
-
-                    <div ng-show="notification.length">
-                        <p class="subTitle">Pending:</p>
-                        <ul>
-                            <li ng-repeat="invite in notification|filter:team.name" class="pendingBox">
-                                <span class="memberName">
-                                    {{invite.email}} - {{invite.user.username}}
-                                </span>
-                                <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteMember($index,team.members);update()" ng-show='checkAccess()'></button>
-                            </li>
-                        </ul>
-                    </div>
 
                     <div class="controls" ng-show='checkAccess()'>
                         <input type="text" ng-enter="addMember()" data-ng-model="memberInput" id="name" class="form-control" placeholder="Add new task">
