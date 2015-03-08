@@ -9,6 +9,15 @@ var mongoose = require('mongoose'),
 	Notification = mongoose.model('Notification'),
 	User = mongoose.model('User'),
 	_ = require('lodash');
+// email notification
+var nodemailer = require('nodemailer');
+var transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: 'sender@gmail.com',
+        pass: 'password'
+    }
+});
 
 /**
  * Create a Notification
@@ -27,6 +36,14 @@ exports.create = function(req, res) {
 			res.jsonp(notification);
 		}
 	});
+
+	// if success send email
+	// transporter.sendMail({
+	//     from: 'sender@gmail.com',
+	//     to: 'receiver@email.com',
+	//     subject: 'hello',
+	//     text: 'hello world!'
+	// });
 };
 
 /**
