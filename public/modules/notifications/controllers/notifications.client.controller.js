@@ -1,8 +1,8 @@
 'use strict';
 
 // Notifications controller
-angular.module('notifications').controller('NotificationsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Notifications', 'Teams',
-	function($scope, $stateParams, $location, Authentication, Notifications, Teams) {
+angular.module('notifications').controller('NotificationsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Notifications', 'Teams', '$timeout',
+	function($scope, $stateParams, $location, Authentication, Notifications, Teams, $timeout) {
 		$scope.authentication = Authentication;
 
 		// Create new Notification
@@ -24,6 +24,7 @@ angular.module('notifications').controller('NotificationsController', ['$scope',
 		};
 
 		$scope.accept = function(mem,index) {
+
 
 			var cancelNotification = function(){
 				$scope.notifications[index].$remove(function() {
@@ -51,10 +52,14 @@ angular.module('notifications').controller('NotificationsController', ['$scope',
 					// 	$scope.error = errorResponse.data.message;
 					// });
 					cancelNotification();
+					// broadcast event
+					
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 				}
 			);
+
+			$timeout(function(){$scope.$root.$broadcast('team.list.update', 'team update');});
 		};
 
 		$scope.decline = function(index) {
@@ -104,7 +109,6 @@ angular.module('notifications').controller('NotificationsController', ['$scope',
 				notificationId: $stateParams.notificationId
 			});
 		};
-
 
 
 	}

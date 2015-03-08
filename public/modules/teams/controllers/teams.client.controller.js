@@ -116,5 +116,8 @@ angular.module('teams').controller('TeamsController', ['$scope', '$stateParams',
 			return ($scope.team.user._id===$scope.authentication.user._id);
 		};
 
+		$scope.$on('team.list.update', function (event, args) {
+			$scope.find();
+		});
 	}
 ]);
